@@ -15,4 +15,4 @@ Este repositório contém o código do **front-end** da aplicação, que foi con
 - **Catalogação de eventos**: Visualização de eventos catalogados com informações como nome, data e localização.
 - **Visualização interativa**: Exibição dos eventos em um mapa utilizando Mapbox.
 - **Interface responsiva**: O sistema é totalmente responsivo, adaptando-se a dispositivos móveis e desktops.
->>>>>>> 3bec62e854ccc8b3304f31fa85ca3732f38807b1
+
