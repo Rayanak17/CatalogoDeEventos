@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-=======
 # Catálogo de Eventos - Frontend - TCC
 
 Este é o repositório do **frontend** da plataforma **Catálogo de Eventos**, desenvolvida como parte do meu TCC do curso de Análise e Desenvolvimento de Sistemas. O objetivo do projeto é fornecer uma interface para catalogar eventos de forma interativa, permitindo aos usuários visualizar e buscar eventos em um mapa interativo.
