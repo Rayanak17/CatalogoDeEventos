@@ -1,0 +1,100 @@
+/* src/pages/catalogocompleto/CatalogoCompleto.css */
+
+.catalogo-completo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh; /* Garantir que a altura mínima ocupe toda a tela */
+    font-family: "Poppins" sans-serif;
+    background-color: #f4f4f4; /* Cor de fundo suave */
+  }
+  
+  .catalogo-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .catalogo-header h1 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .loading-message,
+  .error-message,
+  .no-events-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .event-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cards por linha */
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px; /* Limitar o tamanho máximo da lista de eventos */
+    justify-items: center; /* Garantir que os itens da grid sejam centralizados */
+  }
+  
+  .event-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Limitar a largura máxima do card */
+  }
+  
+  .event-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .event-info {
+    padding: 15px;
+  }
+  
+  .event-date {
+    font-size: 0.9rem;
+    color: #888;
+  }
+  
+  .event-name {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .event-description {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  @media (max-width: 1024px) {
+    .event-list {
+      grid-template-columns: repeat(3, 1fr); /* 3 cards por linha em telas médias */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .event-list {
+      grid-template-columns: repeat(2, 1fr); /* 2 cards por linha em telas pequenas */
+    }
+  
+    .event-card {
+      width: 90%; /* Garantir que os cards fiquem menores em telas pequenas */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .event-list {
+      grid-template-columns: 1fr; /* 1 card por linha em telas muito pequenas */
+    }
+  }
+  
