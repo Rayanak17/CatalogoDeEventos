@@ -1,0 +1,55 @@
+/* Estilos para o Botão de Ajuda */
+.help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .help-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Estilos para o Modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Estilos do conteúdo do modal */
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Botão de Fechar dentro do Modal */
+  .modal-content button {
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .modal-content button:hover {
+    background-color: #e53935;
+  }
+  

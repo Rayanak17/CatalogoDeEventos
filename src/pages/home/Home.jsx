@@ -1,18 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
-import LoginModal from "../login/LoginModal"; // Importando LoginModal da pasta login
-import SignupModal from "../signup/SignupModal"; // Importando SignupModal da pasta signup
-import Catalogo from "../catalogo/Catalog"; // Importando o catálogo de eventos
+import LoginModal from "../login/LoginModal"; 
+import SignupModal from "../signup/SignupModal"; 
+import Catalogo from "../catalogo/Catalog"; 
+import Map from "../mapcomponente/MapComponente";
+import { Button } from "../../components/ui/button";
+import { HelpCircle } from "lucide-react";
+import { HelpModal } from '../help/HelpModal';
 
 export default function Home() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
+  const [showHelpModal, setShowHelpModal] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false); // Estado para controle do tema
 
-  const openLoginModal = () => setShowLoginModal(true);
-  const closeLoginModal = () => setShowLoginModal(false);
+  // Função para alternar entre o modo claro e noturno
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
-  const openSignupModal = () => setShowSignupModal(true);
-  const closeSignupModal = () => setShowSignupModal(false);
+  // Aplicar a classe de tema no body
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+  }, [isDarkMode]);
 
   return (
     <div className="App">
@@ -24,7 +38,10 @@ export default function Home() {
           <li><a href="#map">Mapa</a></li>
           <li><a href="#help">Ajuda</a></li>
         </ul>
-        <button className="login-btn" onClick={openLoginModal}>Login</button>
+        
+        <button className="login-btn" onClick={() => setShowLoginModal(true)}>Login</button>
+        {/* Botão para alternar o tema */}
+    
       </nav>
 
       <main className="main-content">
@@ -42,20 +59,25 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Renderizando o Catálogo de Eventos */}
       <Catalogo />
 
       {showLoginModal && (
         <LoginModal
-          onClose={closeLoginModal}
+          onClose={() => setShowLoginModal(false)}
           onSwitchToSignup={() => {
-            closeLoginModal();
-            openSignupModal();
+            setShowLoginModal(false);
+            setShowSignupModal(true);
           }}
         />
       )}
 
-      {showSignupModal && <SignupModal onClose={closeSignupModal} />}
+      {showSignupModal && <SignupModal onClose={() => setShowSignupModal(false)} />}
+
+      <Button onClick={() => setShowHelpModal(true)} ariaLabel="Abrir ajuda" className="help-button">
+        <HelpCircle size={24} />
+      </Button>
+
+      {showHelpModal && <HelpModal onClose={() => setShowHelpModal(false)} />}
     </div>
   );
 }

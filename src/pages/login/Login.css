@@ -1,133 +1,27 @@
-/* Estilo do fundo escurecido */
+/* Container principal */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo escurecido */
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Estilo do conteúdo do modal */
+/* Modal */
 .modal-content {
-  background-color: #ffffff; /* Fundo branco */
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 400px; /* Largura ajustada para o modal */
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   padding: 30px;
-  width: 350px;
-  max-width: 90%;
   text-align: center;
-  font-family: 'poppins-medium', sans-serif;
+  font-family: 'Poppins', sans-serif;
   position: relative;
-}
-
-/* Título do modal */
-.modal-content h2 {
-  font-size: 28px;
-  margin-bottom: 15px;
-  color: #333333;
-  font-weight: bold;
-  text-transform: uppercase; /* Título em caixa alta */
-}
-
-/* Texto descritivo */
-.modal-content p {
-  font-size: 14px;
-  color: #666666;
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-
-/* Destaque para o texto "CLA, AMIGO!" */
-.modal-content p.highlight {
-  color: #333333;
-  font-weight: bold;
-  margin: 15px 0;
-  font-size: 16px;
-}
-
-/* Link de cadastro */
-.modal-content p a {
-  color: #6c27ff; 
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.modal-content p a:hover {
-  text-decoration: underline;
-}
-
-/* Estilo dos inputs */
-.modal-content input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #cccccc;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #333333;
-  outline: none;
-}
-
-.modal-content input::placeholder {
-  color: #999999;
-}
-
-/* Botão de entrar */
-.modal-content button[type="submit"] {
-  width: 100%;
-  padding: 12px;
-  background-color: #6c27ff; 
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-bottom: 15px;
-  transition: background-color 0.3s ease;
-}
-
-.modal-content button[type="submit"]:hover {
-  background-color: #3d2472;
-}
-
-/* Botão de cadastre-se */
-.modal-content .signup-link {
-  width: 100%;
-  padding: 12px;
-  background-color: transparent;
-  color: #6c27ff; 
-  border: 2px solid #6c27ff;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-bottom: 15px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.modal-content .signup-link:hover {
-  background-color: #6c27ff; 
-  color: #ffffff; /* Texto branco */
-}
-
-/* Link "Esqueceu a senha?" */
-.modal-content .forgot-password {
-  display: block;
-  margin-top: 10px;
-  color: #6c27ff; 
-  font-size: 14px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.modal-content .forgot-password:hover {
-  text-decoration: underline;
 }
 
 /* Botão de fechar */
@@ -135,13 +29,106 @@
   position: absolute;
   top: 15px;
   right: 15px;
-  background-color: transparent;
+  background: none;
   border: none;
-  font-size: 20px;
-  color: #666666;
+  font-size: 24px;
   cursor: pointer;
+  color: #666;
 }
 
 .modal-content .close-modal:hover {
-  color: #333333;
+  color: #333;
+}
+
+/* Título */
+.modal-content .modal-content h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Textos */
+.modal-content .modal-content p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.modal-content .highlight {
+  font-size: 16px;
+  color: #6c27ff;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Formulário */
+.modal-content .modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.modal-content .modal-content input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.modal-content input::placeholder {
+  color: #999;
+}
+
+.modal-content input:focus {
+  border-color: #6c27ff;
+}
+
+/* Botão de Entrar */
+.modal-content form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #6c27ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content form button:hover {
+  background-color: #3d2472;
+}
+
+/* Link de Cadastro */
+.signup-link {
+  background: none;
+  border: none;
+  color: #6c27ff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+.signup-link:hover {
+  color: #3d2472;
+}
+
+/* Link "Esqueceu a senha?" */
+.forgot-password {
+  color: #6c27ff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
 }

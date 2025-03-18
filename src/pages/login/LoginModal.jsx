@@ -1,5 +1,5 @@
 import React from 'react';
-import './Login.css'; 
+import './Login.css'; // Certifique-se de que o caminho está correto
 
 const LoginModal = ({ onClose, onSwitchToSignup }) => {
   return (
@@ -7,7 +7,6 @@ const LoginModal = ({ onClose, onSwitchToSignup }) => {
       <div className="modal-content">
         <button className="close-modal" onClick={onClose}>×</button>
         <h2>LOGIN</h2>
-        <button className='button-modal'></button>
         <p>USE SEU EMAIL E SENHA</p>
         <p className="highlight">ÓLA, AMIGO!</p>
         <p>SE VOCÊ NÃO TEM UMA CONTA, <a href="#" onClick={onSwitchToSignup}>CADASTRE-SE!</a></p>

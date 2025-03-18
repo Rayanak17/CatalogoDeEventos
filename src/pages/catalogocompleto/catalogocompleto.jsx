@@ -1,71 +1,94 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Search, HelpCircle } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import "./CatalogoCompleto.css";
 
+// URL da API (usei uma variável de ambiente, como no seu código anterior)
+const EVENT_SERVICE_URL = import.meta.env.VITE_EVENT_SERVICE_URL;
+
 export default function CatalogoCompleto() {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    async function fetchEvents() {
-      try {
-        // Requisição para obter todos os eventos
-        const response = await axios.get(
-          "https://event-service-eventscatalog.onrender.com/events"
-        );
-
-        // Verificação se a resposta foi bem-sucedida
-        if (response.status === 200) {
-          // Ordenando os eventos pela data mais recente (se necessário)
-          const sortedEvents = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
-          setEvents(sortedEvents);
-        } else {
-          console.error("Erro na resposta da API: Status", response.status);
-          setError("Erro ao carregar eventos. Tente novamente.");
-        }
-      } catch (err) {
-        console.error("Erro na requisição da API:", err);
-        setError("Não foi possível carregar os eventos.");
-      } finally {
-        setLoading(false);
-      }
+  // Função para buscar eventos usando useQuery
+  const fetchEvents = async () => {
+    try {
+      const response = await axios.get(`${EVENT_SERVICE_URL}/events`);
+      return response.data;
+    } catch (error) {
+      throw new Error("Erro ao buscar eventos: " + error.message);
     }
+  };
 
-    fetchEvents();
-  }, []);
+  const {
+    data: events = [], // Se não vier nada, começa com array vazio
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["events"],
+    queryFn: fetchEvents,
+  });
+
+  // Filtro de eventos com base na data atual
+  const now = new Date().toISOString();
+  const filteredEvents = events.filter((event) => {
+    return event.endDateTime
+      ? event.endDateTime > now
+      : event.startDateTime > now;
+  }) || [];
+
+  // Filtro por busca (input)
+  const searchedEvents = filteredEvents.filter((event) =>
+    event.eventTitle.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="catalogo-completo-container">
       <header className="catalogo-header">
         <h1>Catálogo de Eventos</h1>
+        <div className="search-container">
+          <Search className="search-icon" />
+          <input
+            type="text"
+            placeholder="Pesquisar eventos..."
+            className="search-input"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
       </header>
 
-      {loading && <p className="loading-message">Carregando eventos...</p>}
-      {error && <p className="error-message">{error}</p>}
+      {isLoading && <p className="loading-message">Carregando eventos...</p>}
+      {isError && <p className="error-message">{error.message}</p>}
 
       <div className="event-list">
-        {events.length > 0 ? (
-          events.map((event, index) => (
-            <div key={index} className="event-card">
+        {searchedEvents.length > 0 ? (
+          searchedEvents.slice(0, 8).map((event, index) => ( // Exibe até 8 eventos
+            <div key={event.eventId || index} className="event-card">
               <div
                 className="event-image"
-                style={{ backgroundImage: `url(${event.imageUrl})` }}
+                style={{
+                  backgroundImage: `url(${EVENT_SERVICE_URL}/map?latitude=${event.latitude}&longitude=${event.longitude})`,
+                }}
               ></div>
-              <div className="event-info">
-                <p className="event-date">
-                  {new Date(event.date).toLocaleDateString()}
-                </p>
-                <h2 className="event-name">{event.name}</h2>
-                <p className="event-description">{event.description}</p>
-              </div>
+              <p className="event-date">
+                {new Date(event.startDateTime).toLocaleDateString()} -{" "}
+                {new Date(event.startDateTime).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </p>
+              <h2 className="event-name">{event.eventTitle}</h2>
+              <p className="event-description">{event.eventDescription}</p>
             </div>
           ))
         ) : (
-          !loading && <p className="no-events-message">Nenhum evento encontrado.</p>
+          !isLoading && <p className="no-events-message">Nenhum evento encontrado.</p>
         )}
       </div>
     </div>
   );
 }
-

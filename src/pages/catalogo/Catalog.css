@@ -1,7 +1,5 @@
-/* Catalogo.css */
-
 .container {
-  margin-top: 85px;
+  margin-top: 90px;
   padding: 24px;
   background-color: #f7fafc;
   min-height: 100vh;
@@ -14,7 +12,7 @@
 
 .header {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* Divide em três partes: título, input e botão */
+  
   align-items: center;
   width: 100%;
   margin-bottom: 24px;
@@ -23,11 +21,12 @@
 
 
 .title {
-  font-size: 1.6rem;
-  font-weight: bold;
+  font-size: 35px;
+  font-weight: 600;
   color: #2d3748;
-  text-align: left; /* Garante que o título fique alinhado à esquerda */
-  margin-left: 155px;
+  text-align: center; /* Garante que o título fique alinhado à esquerda */
+  margin: auto;
+  width: 100%;
 }
 
 .search-container {
@@ -44,22 +43,6 @@
   position: relative;
   height: 32px; /* Define uma altura menor */
   margin-left: -50px;
-}
-
-.search-icon {
-  color: #6b46c1;
-  font-size: 1rem; /* Reduzi um pouco o tamanho do ícone */
-  margin-right: 6px;
-}
-
-.search-input {
-  width: 100%;
-  border: none;
-  outline: none;
-  font-size: 0.9rem; /* Reduzi um pouco o tamanho do texto */
-  padding-left: 6px;
-  flex: 1;
-  height: 100%;
 }
 
 .login-button {
@@ -85,72 +68,47 @@
   padding: 16px 0;
 }
 
-.filter-title {
-  font-weight: bold;
-}
-
-.event-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 20px;
-  width: 80%;
-}
-
 .event-card {
   background-color: white;
   border-radius: 10px;
-  padding: 16px;
+  padding: 10px;
   text-align: left;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  max-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-.event-card:hover {
-  transform: translateY(-5px);
+.event-card .event-name {
+  font-weight: bold;
+  font-size: 1.125rem;  /* Reduzi o tamanho da fonte do nome do evento para 0.875rem */
+  color: #2d3748;
+  margin-bottom: -6px;
 }
 
-.event-image {
+.event-card .event-description {
+  color: #4a5568;
+  font-size: 14px;
+  max-height: 120px;
+  overflow: hidden;
+}
+
+.event-card .event-image {
   background-color: #1AB393;
-  height: 180px;
+  height: 170px;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   background-size: cover;
   background-position: center;
 }
 
-.event-date {
+.event-card .event-date {
   font-size: 0.875rem;
   color: #6b7280;
   font-weight: bold;
-}
-
-.event-name {
-  font-weight: bold;
-  font-size: 1.125rem;
-  color: #2d3748;
-  margin-bottom: 8px;
-}
-
-.event-description {
-  color: #4a5568;
-  font-size: 0.875rem;
-}
-
-.help-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #6b46c1;
-  color: white;
-  padding: 8px;
-  border-radius: 30%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.help-button:hover {
-  background-color: #542e9c;
+  margin-bottom: -3px;  /* Menor espaço entre a data e a descrição */
 }
 
 .error-message {
