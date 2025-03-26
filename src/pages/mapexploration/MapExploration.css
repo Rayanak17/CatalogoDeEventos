@@ -1,0 +1,64 @@
+.map-section {
+    display: flex;
+    justify-content: space-between; /* Mantém os itens nas extremidades */
+    align-items: flex-start;
+    background: #f4f4f4;
+    padding:20px;
+    border-radius: 16px;
+    max-width: 1400px;
+    margin: 60px auto;
+    width: 100%;
+    margin-top: 0;
+  }
+  
+  .map-info {
+    margin-left: 25px;
+    flex: 1;
+    max-width: 500px;
+    margin-right: 40px; /* Espaço entre a descrição e o mapa */
+  }
+  
+  .map-info h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .map-info p {
+    font-size: 18px;
+    color: #333;
+    margin: 15px 0 25px;
+  }
+  
+  .expand-btn {
+    background: #660099;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .expand-btn:hover {
+    background: #4a0077;
+  }
+  
+  .map-container {
+    width: 90%; 
+    height: 200px;
+    flex: 2;
+    height: 600px;
+    margin-left: 200px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  
+  iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+  }
+  
