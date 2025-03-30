@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "./pages/home/home"; // Sua página Home
 import Catalogo from "./pages/catalogo/Catalog"; // Catálogo resumido
 import CatalogoCompleto from "./pages/catalogocompleto/catalogocompleto"; // Catálogo completo
+import "./Modalscontroller"
 
 // Importando as novas páginas
 import MapExploracao from "./pages/mapexploration/MapExploration"; // Mapa de Exploração

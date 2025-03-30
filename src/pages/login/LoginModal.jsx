@@ -9,7 +9,7 @@ const LoginModal = ({ onClose, onSwitchToSignup }) => {
         <h2>LOGIN</h2>
         <p>USE SEU EMAIL E SENHA</p>
         <p className="highlight">ÓLA, AMIGO!</p>
-        <p>SE VOCÊ NÃO TEM UMA CONTA, <a href="#" onClick={onSwitchToSignup}>CADASTRE-SE!</a></p>
+        <p>SE VOCÊ NÃO TEM UMA CONTA, CADASTRE-SE!</p>
 
         <form>
           <input type="email" placeholder="E-mail" />
@@ -17,9 +17,7 @@ const LoginModal = ({ onClose, onSwitchToSignup }) => {
           <button type="submit">Entrar</button>
         </form>
 
-        <button className="signup-link" onClick={onSwitchToSignup}>
-          Cadastre-se
-        </button>
+        <button className="signup-link" onClick={onSwitchToSignup}>Cadastrar-se</button>
         <a className="forgot-password" href="#">Esqueceu a senha?</a>
       </div>
     </div>

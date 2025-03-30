@@ -3,23 +3,28 @@ import "./Home.css";
 import LoginModal from "../login/LoginModal"; 
 import SignupModal from "../signup/SignupModal"; 
 import Catalogo from "../catalogo/Catalog"; 
-import Map from "../mapcomponente/MapComponente";
 import { Button } from "../../components/ui/button";
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, Moon, Sun } from "lucide-react"; 
 import { HelpModal } from '../help/HelpModal';
+import MapExploration from "../mapexploration/MapExploration";  // Aqui está a importação
+import Footer from "../../components/layout/footer";
 
 export default function Home() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false); // Estado para controle do tema
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark"; // Salva a escolha do usuário
+  });
 
-  // Função para alternar entre o modo claro e noturno
+  // Alternar o tema
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem("theme", newMode ? "dark" : "light");
   };
 
-  // Aplicar a classe de tema no body
+  // Aplica o tema ao carregar a página
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add("dark-mode");
@@ -39,9 +44,9 @@ export default function Home() {
           <li><a href="#help">Ajuda</a></li>
         </ul>
         
-        <button className="login-btn" onClick={() => setShowLoginModal(true)}>Login</button>
-        {/* Botão para alternar o tema */}
-    
+        <div className="nav-buttons">
+          <button className="login-btn" onClick={() => setShowLoginModal(true)}>Login</button>
+        </div>
       </nav>
 
       <main className="main-content">
@@ -50,7 +55,6 @@ export default function Home() {
           <p>
             A melhor maneira de encontrar e divulgar eventos na sua região!
             Encontre eventos perto de você com um simples clique no mapa.
-            Navegue por categorias, datas e localizações. Simples, rápido e eficiente.
           </p>
           <button className="explore-btn">Explore eventos</button>
         </div>
@@ -71,6 +75,11 @@ export default function Home() {
         />
       )}
 
+      {/* Aqui está o mapa sendo inserido na home */}
+      <section id="map" className="map-section">
+        <MapExploration />
+      </section>
+
       {showSignupModal && <SignupModal onClose={() => setShowSignupModal(false)} />}
 
       <Button onClick={() => setShowHelpModal(true)} ariaLabel="Abrir ajuda" className="help-button">
@@ -78,6 +87,9 @@ export default function Home() {
       </Button>
 
       {showHelpModal && <HelpModal onClose={() => setShowHelpModal(false)} />}
+
+      <Footer />
+
     </div>
   );
 }
