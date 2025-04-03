@@ -81,7 +81,7 @@ export default function CatalogoCompleto() {
           <Search className="search-icon" />
           <input
             type="text"
-            placeholder="Pesquisar eventos..."
+            placeholder="Pesquisar eventos"
             className="search-input"
             value={filters.search}
             onChange={(e) => setFilters({ ...filters, search: e.target.value })}
@@ -94,7 +94,7 @@ export default function CatalogoCompleto() {
             value={filters.dateFilter}
             onChange={(e) => setFilters({ ...filters, dateFilter: e.target.value })}
           >
-            <option value="all">Todas as datas</option>
+            <option value="all">Data</option>
             <option value="today">Hoje</option>
             <option value="tomorrow">Amanhã</option>
             <option value="weekend">Este fim de semana</option>
@@ -107,7 +107,7 @@ export default function CatalogoCompleto() {
             value={filters.priceFilter}
             onChange={(e) => setFilters({ ...filters, priceFilter: e.target.value })}
           >
-            <option value="all">Todos</option>
+            <option value="all">Preços</option>
             <option value="free">Gratuitos</option>
             <option value="paid">Pagos</option>
           </select>

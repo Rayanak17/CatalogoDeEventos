@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
-import LoginModal from "../login/LoginModal"; 
-import SignupModal from "../signup/SignupModal"; 
-import Catalogo from "../catalogo/Catalog"; 
+import LoginModal from "../../components/auth/login/LoginModal"; 
+import SignupModal from "../../components/auth/signup/SignupModal"; 
+import Catalogo from "../../components/layout/catalogo/Catalog"; 
 import { Button } from "../../components/ui/button";
-import { HelpCircle, Moon, Sun } from "lucide-react"; 
+import { HelpCircle } from "lucide-react"; 
 import { HelpModal } from '../help/HelpModal';
-import MapExploration from "../mapexploration/MapExploration";  // Aqui está a importação
-import Footer from "../../components/layout/footer";
+import Map from "../../components/layout/mapcomponente/MapComponente"; 
+import Footer from "../../components/layout/footer/footer";
+import Navbar from "../../components/layout/navbar/navbar"
 
 export default function Home() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -35,20 +36,8 @@ export default function Home() {
 
   return (
     <div className="App">
-      <nav className="navbar">
-        <div className="logo">NomeSite</div>
-        <ul className="nav-links">
-          <li><a href="#about">Sobre nós</a></li>
-          <li><a href="#events">Eventos</a></li>
-          <li><a href="#map">Mapa</a></li>
-          <li><a href="#help">Ajuda</a></li>
-        </ul>
-        
-        <div className="nav-buttons">
-          <button className="login-btn" onClick={() => setShowLoginModal(true)}>Login</button>
-        </div>
-      </nav>
-
+      <Navbar />
+      
       <main className="main-content">
         <div className="text-content">
           <h1>Descubra Eventos em João Pessoa</h1>
@@ -57,6 +46,8 @@ export default function Home() {
             Encontre eventos perto de você com um simples clique no mapa.
           </p>
           <button className="explore-btn">Explore eventos</button>
+          <Navbar onLoginClick={() => setShowLoginModal(true)} />
+
         </div>
         <div className="image-content">
           <img src="../assets/fotomap.svg" alt="figura" />
@@ -65,6 +56,7 @@ export default function Home() {
 
       <Catalogo />
 
+      {/* Modais de login e cadastro */}
       {showLoginModal && (
         <LoginModal
           onClose={() => setShowLoginModal(false)}
@@ -75,21 +67,22 @@ export default function Home() {
         />
       )}
 
-      {/* Aqui está o mapa sendo inserido na home */}
-      <section id="map" className="map-section">
-        <MapExploration />
-      </section>
-
       {showSignupModal && <SignupModal onClose={() => setShowSignupModal(false)} />}
 
+      {/* Mapa */}
+      <section id="map" className="map-section map-container">
+        <Map />
+      </section>
+
+      {/* Botão de ajuda */}
       <Button onClick={() => setShowHelpModal(true)} ariaLabel="Abrir ajuda" className="help-button">
         <HelpCircle size={24} />
       </Button>
 
       {showHelpModal && <HelpModal onClose={() => setShowHelpModal(false)} />}
 
+      {/* Rodapé */}
       <Footer />
-
     </div>
   );
 }

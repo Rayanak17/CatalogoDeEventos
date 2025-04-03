@@ -25,7 +25,7 @@
   margin-right: 40px;
  
   font-size: 2rem;
-  color: #333;
+  color: #8964c5;
   white-space: nowrap; /* Impede que o título quebre para a linha de baixo */
   flex: 1; /* Permite que o título ocupe espaço sem ser esmagado */
 }
@@ -81,6 +81,7 @@
   max-width: 250px;
   background-color: #fff;
   cursor: pointer;
+  border-color: #ac7bd6;
 }
 
 /* Lista de eventos */

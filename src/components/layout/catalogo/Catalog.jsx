@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HelpCircle } from "lucide-react";
 import "./Catalog.css";
-import "../home/Home.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";

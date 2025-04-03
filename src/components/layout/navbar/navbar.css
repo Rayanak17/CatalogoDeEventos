@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.navbar { /* Adicionando ponto (.) para selecionar a classe navbar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 40px;
+    background-color: #f5f5f5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    margin-left: 140px; /* Logo fixa no lugar */
+}
+
+.nav-links {
+    font-size: 17px;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Permite que os links ocupem o espaço restante */
+    justify-content: center; /* Centraliza os links */
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+.nav-links li a:hover {
+    color: #6a1b9a;
+}
+
+.login-btn {
+    padding: 7px 19px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #6a1b9a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 150px; /* Login fixa no lugar */
+}
+
+.login-btn:hover {
+    background-color: #4a0c6b;
+}
+
+.user-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .user-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 2px 5px; /* Mesmo padding do botão de login */
+    font-size: 13px;
+    font-weight: bold;
+    color: #000000;
+    border-radius: 5px;
+    transition: background 0.3s;
+    margin-right: 150px; /* Mesma margem do login */
+}
+
+.user-menu:hover {
+    background-color: #ac88bf;
+}
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    min-width: 150px;
+    z-index: 1000;
+  }
+  
+  .dropdown-menu a {
+    display: block;
+    color: #333;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background 0.3s;
+  }
+  
+  .dropdown-menu a:hover {
+    background: #f0f0f0;
+  }
+  
+  .logout-btn {
+    justify-content: center;
+    width: 50%;
+    background: #dc3545;
+    color: white;
+    padding: 6px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+  }
+  
+  .logout-btn:hover {
+    background: #b02a37;
+  }
