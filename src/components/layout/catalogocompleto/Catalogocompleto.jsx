@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from "react";
 import { Search } from "lucide-react";
+import { FaRegHeart, FaHeart } from "react-icons/fa"; // IMPORTANDO OS ÍCONES
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { useFavorites } from "../../../context/FavoritesContext";  
 import "./CatalogoCompleto.css";
 
 const EVENT_SERVICE_URL = import.meta.env.VITE_EVENT_SERVICE_URL;
@@ -12,6 +14,8 @@ export default function CatalogoCompleto() {
     dateFilter: "all",
     priceFilter: "all",
   });
+
+  const { favorites, toggleFavorite, isFavorite } = useFavorites();
 
   const fetchEvents = async () => {
     try {
@@ -133,12 +137,19 @@ export default function CatalogoCompleto() {
                   hour: "2-digit",
                   minute: "2-digit",
                 })}
+                {/* Botão de favoritar */}
+              <button
+                className="favorite-button"
+                onClick={() => toggleFavorite(event)}
+                aria-label={isFavorite(event.eventId) ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+              >
+                {isFavorite(event.eventId) ? <FaHeart /> : <FaRegHeart />} {/* Troquei o emoji por ícones */}
+              </button>
+              
               </p>
               <h2 className="event-name">{event.eventTitle}</h2>
               <p className="event-description">{event.eventDescription}</p>
-              <p className="event-price">
-                {event.price === 0 ? "Gratuito" : `R$ ${event.price}`}
-              </p>
+
             </div>
           ))
         ) : (
