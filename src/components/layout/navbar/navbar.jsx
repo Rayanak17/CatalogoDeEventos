@@ -40,11 +40,18 @@ const Navbar = ({ onLoginClick }) => {
             <div className="user-menu" ref={menuRef} onClick={() => setMenuOpen(!menuOpen)}>
             <User className="user-icon" />
             {menuOpen && (
-                <div className="dropdown-menu">
-                  <Link to="/profile">Eventos Favoritos</Link>
-                  <button className="logout-btn" onClick={logout}>Sair</button>
-                </div>
-              )}
+              <div className="dropdown-menu">
+                <Link to="/profile">Eventos Favoritos</Link>
+
+                {/* Link exclusivo do admin */}
+                {user?.email === "teste@example.com" && (
+                  <Link to="/admin/adicionar">Adicionar Evento</Link>
+                )}
+
+                <button className="logout-btn" onClick={logout}>Sair</button>
+              </div>
+            )}
+
             </div>
           ) : (
             <button className="login-btn" onClick={onLoginClick}>Login</button>

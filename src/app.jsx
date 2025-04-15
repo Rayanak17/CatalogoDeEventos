@@ -8,7 +8,7 @@ import MapExploracao from "./components/layout/mapexploration/MapExploration";
 import LoginModal from "./components/auth/login/LoginModal";
 import CadastroModal from "./components/auth/signup/SignupModal";
 import PainelAdmin from "./pages/admin/PainelAdmin";
-import AdicionarEvento from "./pages/admin/AddEvento";
+import AdicionarEvento from "./pages/admin/AddEvent";
 import { EventsProvider } from "./components/EventsProvider";
 import { AuthProvider, useAuth } from './context/AuthContext';
 
@@ -21,7 +21,7 @@ function PrivateRoute({ element }) {
 
 function AdminRoute({ element }) {
   const { user } = useAuth();
-  return user?.email === "admin@email.com" ? element : <Navigate to="/login" />;
+  return user?.email === "teste@example.com" ? element : <Navigate to="/login" />;
 }
 
 function App() {

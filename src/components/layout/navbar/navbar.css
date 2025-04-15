@@ -130,3 +130,39 @@ body {
   .logout-btn:hover {
     background: #b02a37;
   }
+
+  .dropdown-menu {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    top: 40px;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown-menu a {
+    display: block;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  
+  .dropdown-menu a:hover {
+    background: #f0f0f0;
+    border-radius: 6px;
+  }
+  
+  /* Destaque pro link de admin */
+  .dropdown-menu a.admin-link {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .dropdown-menu a.admin-link:hover {
+    background-color: #e0f0ff;
+  }
+  
