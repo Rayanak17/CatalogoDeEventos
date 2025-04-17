@@ -7,7 +7,7 @@ Este repositório contém o código do **front-end** da aplicação, que foi con
 
 ## Tecnologias Utilizadas
 
-- **Frontend**: React.js, HTML, CSS, JavaScript
+- **Frontend**: React.js, CSS, JavaScript
 - **API de Mapas**: Mapbox (para exibição interativa de eventos no mapa)
 
 ## Funcionalidades
