@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from "react";
 import { Search } from "lucide-react";
-import { FaRegHeart, FaHeart } from "react-icons/fa"; // IMPORTANDO OS ÍCONES
-import axios from "axios";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
-import { useFavorites } from "../../../context/FavoritesContext";  
+import { useFavorites } from "../../../context/FavoritesContext";
+import { useAuth } from "../../../context/AuthContext"; // 🔥 Importa o contexto de autenticação
+import axios from "axios";
 import "./CatalogoCompleto.css";
 
 const EVENT_SERVICE_URL = import.meta.env.VITE_EVENT_SERVICE_URL;
@@ -16,6 +17,7 @@ export default function CatalogoCompleto() {
   });
 
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
+  const { user } = useAuth(); // 🔥 Acessa o usuário logado
 
   const fetchEvents = async () => {
     try {
@@ -75,6 +77,15 @@ export default function CatalogoCompleto() {
       return isUpcoming && matchesDate && matchesPrice && matchesSearch;
     });
   }, [events, filters]);
+
+  const handleFavoriteClick = (event) => {
+    if (!user) {
+      alert("Você precisa estar logado para favoritar um evento.");
+      return;
+    }
+
+    toggleFavorite(event);
+  };
 
   return (
     <div className="catalogo-completo-container">
@@ -137,23 +148,33 @@ export default function CatalogoCompleto() {
                   hour: "2-digit",
                   minute: "2-digit",
                 })}
-                {/* Botão de favoritar */}
-              <button
-                className="favorite-button"
-                onClick={() => toggleFavorite(event)}
-                aria-label={isFavorite(event.eventId) ? "Remover dos favoritos" : "Adicionar aos favoritos"}
-              >
-                {isFavorite(event.eventId) ? <FaHeart /> : <FaRegHeart />} {/* Troquei o emoji por ícones */}
-              </button>
-              
               </p>
               <h2 className="event-name">{event.eventTitle}</h2>
               <p className="event-description">{event.eventDescription}</p>
 
+              {/* Botão de favoritar (só aparece se o usuário estiver logado) */}
+              {user && (
+                <button
+                  className={`favorite-button ${isFavorite(event.eventId) ? "filled" : ""}`}
+                  onClick={() => handleFavoriteClick(event)}
+                >
+                  {isFavorite(event.eventId) ? <FaHeart /> : <FaRegHeart />}
+                </button>
+              )}
+
+              {/* Alternativa: alerta se não estiver logado */}
+              {!user && (
+                <button
+                  className="favorite-button"
+                  onClick={() => alert("Você precisa estar logado para favoritar um evento.")}
+                >
+                  <FaRegHeart />
+                </button>
+              )}
             </div>
           ))
         ) : (
-          !isLoading && <p className="no-events-message">Nenhum evento encontrado.</p>
+          <p>Nenhum evento encontrado.</p>
         )}
       </div>
     </div>

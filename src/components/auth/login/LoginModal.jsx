@@ -3,7 +3,8 @@ import './Login.css';
 import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import Api from "../../../api";
-import { useAuth } from "../../../useAuth"; // Certifique-se de que o caminho está correto
+import { useAuth } from "../../../context/AuthContext";
+
 
 const AUTH_SERVICE_URL = import.meta.env.VITE_AUTH_SERVICE_URL;
 
@@ -22,15 +23,25 @@ const LoginModal = ({ onClose, onSwitchToSignup }) => {
       return response.data;
     },
     onSuccess: (data) => {
-      localStorage.setItem("token", data.userToken); // Salva o token no localStorage
-      alert('Login realizado com sucesso!');
-
-      // Atualiza o contexto com os dados do usuário
-      const userData = { name: data.userName, email: email };  
-      login(userData); 
-
+      const token = data.userToken;
+    
+      // Decodifica o token JWT para extrair o ID
+      const decoded = JSON.parse(atob(token.split('.')[1]));
+    
+      const userData = {
+        id: decoded.userId, // ✅ Agora com ID extraído
+        name: data.userName,
+        email: decoded.userEmail
+      };
+    
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(userData));
+    
+      login(userData);
+      alert("Login realizado com sucesso!");
       onClose();
     },
+    
     onError: (err) => {
       setError(err.response?.data?.message || 'Erro ao fazer login');
     },

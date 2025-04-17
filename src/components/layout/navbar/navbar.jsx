@@ -30,28 +30,25 @@ const Navbar = ({ onLoginClick }) => {
       <nav className="navbar">
         <div className="logo">NomeSite</div>
         <ul className="nav-links">
-          <li><Link to="/about">Sobre nós</Link></li>
-          <li><Link to="/events">Eventos</Link></li>
-          <li><Link to="/map">Mapa</Link></li>
+          <li><Link to="/sobre">Sobre nós</Link></li>
+          <li><Link to="/catalogocompleto">Eventos</Link></li>
+          <li><Link to="/explorar">Mapa</Link></li>
           <li><Link to="/help">Ajuda</Link></li>
         </ul>
         <div className="nav-buttons">
           {user ? (
             <div className="user-menu" ref={menuRef} onClick={() => setMenuOpen(!menuOpen)}>
-            <User className="user-icon" />
-            {menuOpen && (
-              <div className="dropdown-menu">
-                <Link to="/profile">Eventos Favoritos</Link>
-
-                {/* Link exclusivo do admin */}
-                {user?.email === "teste@example.com" && (
-                  <Link to="/admin/adicionar">Adicionar Evento</Link>
-                )}
-
-                <button className="logout-btn" onClick={logout}>Sair</button>
-              </div>
-            )}
-
+              <User className="user-icon" />
+              {menuOpen && (
+                <div className="dropdown-menu">
+                  <Link to="/favoritos">Eventos Favoritos</Link> {/* Atualizado para /favoritos */}
+                  {/* Link exclusivo do admin */}
+                  {user?.email === "teste@example.com" && (
+                    <Link to="/admin/adicionar">Adicionar Evento</Link>
+                  )}
+                  <button className="logout-btn" onClick={logout}>Sair</button>
+                </div>
+              )}
             </div>
           ) : (
             <button className="login-btn" onClick={onLoginClick}>Login</button>

@@ -9,6 +9,9 @@ import { HelpModal } from '../help/HelpModal';
 import Map from "../../components/layout/mapcomponente/MapComponente"; 
 import Footer from "../../components/layout/footer/footer";
 import Navbar from "../../components/layout/navbar/navbar"
+import { Link } from 'react-router-dom'; // Importe o Link
+import MapExploration from "../../components/layout/mapexploration/MapExploration";
+
 
 export default function Home() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -45,7 +48,10 @@ export default function Home() {
             A melhor maneira de encontrar e divulgar eventos na sua região!
             Encontre eventos perto de você com um simples clique no mapa.
           </p>
-          <button className="explore-btn">Explore eventos</button>
+          <Link to="/explorar">
+            <button className="explore-btn">Explore eventos</button>
+          </Link>
+
           <Navbar onLoginClick={() => setShowLoginModal(true)} />
 
         </div>
@@ -71,7 +77,7 @@ export default function Home() {
 
       {/* Mapa */}
       <section id="map" className="map-section map-container">
-        <Map />
+        <MapExploration />
       </section>
 
       {/* Botão de ajuda */}
