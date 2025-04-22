@@ -1,48 +1,105 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useFavorites } from '../../context/FavoritesContext';
-import "./eventsfav.css";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useFavorites } from '../../context/FavoritesContext'; // Importando o contexto de favoritos
+import './eventsfav.css';
 
 const EventsFav = () => {
-  const { user } = useAuth();  // Acessando os dados do usuário do AuthContext
-  const { favorites } = useFavorites();  // Acessando os eventos favoritos do FavoritesContext
-  const [userFavorites, setUserFavorites] = useState([]);
+  const { user } = useAuth(); // Acessando os dados do usuário do AuthContext
+  const { favorites, toggleFavorite, isFavorite } = useFavorites(); // Acessando o estado de favoritos e funções de alternância
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Verifica se o usuário está logado e se favorites é um array
-    if (user && Array.isArray(favorites)) {
-      // Filtra os eventos favoritos do usuário
-      const filteredFavorites = favorites.filter(event => event.userId === user.id);
-      setUserFavorites(filteredFavorites);
+    if (user) {
+      const userServiceUrl = 'https://user-service-eventscatalog.onrender.com/favorites';
+      const userRecentCadastreId = user.id;
+
+      const fetchUserFavorites = async () => {
+        try {
+          if (!userRecentCadastreId) {
+            throw new Error('ID do usuário ausente');
+          }
+
+          const token = localStorage.getItem('token');
+          const url = `${userServiceUrl}/list?userId=${userRecentCadastreId}`;
+
+          const response = await axios.get(url, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.status === 200) {
+            // Não estamos mais atualizando o estado de favoritos diretamente aqui.
+            // Agora, o estado é gerenciado no contexto.
+            setLoading(false);
+          } else {
+            throw new Error('Falha ao carregar favoritos');
+          }
+        } catch (error) {
+          if (error.response) {
+            setError(`Erro ${error.response.status}: ${error.response.data.message}`);
+          } else {
+            setError(error.message);
+          }
+          setLoading(false);
+        }
+      };
+
+      fetchUserFavorites();
+    } else {
+      setLoading(false);
     }
-  }, [user, favorites]);  // Recalcula sempre que o usuário ou os favoritos mudarem
+  }, [user]);
 
-  // Exibe mensagem de erro caso o usuário não esteja logado
   if (!user) {
-    return <div>Por favor, faça login para ver seus eventos favoritos.</div>;
-  }
-
-  // Exibe mensagem caso não haja favoritos
-  if (userFavorites.length === 0) {
     return (
       <div className="events-favorites">
-        <h2>Eventos Favoritos de {user?.name}</h2>
-        <p>Você ainda não tem eventos favoritos.</p>
+        <p>Por favor, faça login para ver seus eventos favoritos.</p>
+        <button onClick={() => navigate('/login')}>Ir para Login</button>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="events-favorites">
+        <p>Carregando seus eventos favoritos...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="events-favorites">
+        <h2>Erro ao carregar favoritos</h2>
+        <p>{error}</p>
       </div>
     );
   }
 
   return (
     <div className="events-favorites">
-      <h2>Eventos Favoritos de {user?.name}</h2>
-      <ul>
-        {userFavorites.map((event, index) => (
-          <li key={index}>
-            <h3>{event.title}</h3>
-            <p>{event.description}</p>
-          </li>
-        ))}
-      </ul>
+      <h2>Eventos Favoritos de {user?.name || 'Usuário'}</h2>
+      {favorites.length > 0 ? (
+        <ul>
+          {favorites.map((event, index) => (
+            <li key={index}>
+              <h3>{event.title}</h3>
+              <p>{event.description}</p>
+              {/* Botão para alternar favorito */}
+              <button onClick={() => toggleFavorite(event)}>
+                {isFavorite(event.eventId) ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos'}
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Você ainda não tem eventos favoritos.</p>
+      )}
     </div>
   );
 };
