@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useFavorites } from '../../context/FavoritesContext'; // Importando o contexto de favoritos
+import { useFavorites } from '../../context/FavoritesContext';
 import './eventsfav.css';
 
 const EventsFav = () => {
-  const { user } = useAuth(); // Acessando os dados do usuário do AuthContext
-  const { favorites, toggleFavorite, isFavorite } = useFavorites(); // Acessando o estado de favoritos e funções de alternância
+  const { user } = useAuth();
+  const { favorites, toggleFavorite, isFavorite } = useFavorites();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -33,8 +33,6 @@ const EventsFav = () => {
           });
 
           if (response.status === 200) {
-            // Não estamos mais atualizando o estado de favoritos diretamente aqui.
-            // Agora, o estado é gerenciado no contexto.
             setLoading(false);
           } else {
             throw new Error('Falha ao carregar favoritos');
@@ -59,7 +57,9 @@ const EventsFav = () => {
     return (
       <div className="events-favorites">
         <p>Por favor, faça login para ver seus eventos favoritos.</p>
-        <button onClick={() => navigate('/login')}>Ir para Login</button>
+        <button className="fav-btn" onClick={() => navigate('/login')}>
+          Ir para Login
+        </button>
       </div>
     );
   }
@@ -85,13 +85,31 @@ const EventsFav = () => {
     <div className="events-favorites">
       <h2>Eventos Favoritos de {user?.name || 'Usuário'}</h2>
       {favorites.length > 0 ? (
-        <ul>
+        <ul className="fav-event-list">
           {favorites.map((event, index) => (
-            <li key={index}>
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
-              {/* Botão para alternar favorito */}
-              <button onClick={() => toggleFavorite(event)}>
+            <li key={index} className="fav-card">
+              <div className="fav-header">
+                <h3>{event.title}</h3>
+                <span
+                  className="heart-icon"
+                  onClick={() => toggleFavorite(event)}
+                >
+                  {isFavorite(event.eventId) ? '❤️' : '🤍'}
+                </span>
+              </div>
+              <div className="fav-info">
+                <p>{event.date}</p>
+                <p>{event.location}</p>
+              </div>
+              <p className="fav-description">{event.description}</p>
+              {event.mapImage && (
+                <img
+                  src={event.mapImage}
+                  alt="Mapa do evento"
+                  className="fav-map-img"
+                />
+              )}
+              <button className="fav-btn" onClick={() => toggleFavorite(event)}>
                 {isFavorite(event.eventId) ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos'}
               </button>
             </li>

@@ -1,0 +1,95 @@
+.events-favorites {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.events-favorites h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+  text-align: center;
+}
+
+.fav-event-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.fav-card {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fav-card:hover {
+  transform: translateY(-4px);
+}
+
+.fav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.fav-header h3 {
+  font-size: 1.25rem;
+  color: #222;
+  margin: 0;
+}
+
+.heart-icon {
+  font-size: 1.5rem;
+  color: #e91e63;
+  cursor: pointer;
+}
+
+.fav-info {
+  margin-bottom: 0.75rem;
+  color: #444;
+}
+
+.fav-info p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.fav-description {
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.fav-map-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 1rem 0;
+  object-fit: cover;
+  max-height: 200px;
+}
+
+.fav-btn {
+  align-self: flex-start;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fav-btn:hover {
+  background-color: #0056b3;
+}
