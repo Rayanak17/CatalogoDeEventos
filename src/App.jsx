@@ -11,9 +11,9 @@ import PainelAdmin from './pages/admin/PainelAdmin.jsx';
 import AdicionarEvento from './pages/admin/AddEvent.jsx'
 import FavoritosPage from './pages/favoritespage/eventsfav.jsx';
 import Sobre from './pages/sobre/sobrenos.jsx';
-import ForgotPassword from "./components/auth/forgotpassword/ForgotPassword.jsx";  
+import ForgotPassword from './components/auth/forgotpassword/ForgotPassword.jsx';  
 import Navbar from './components/layout/navbar/navbar.jsx';
-import { EventsProvider } from "./components/EventsProvider.jsx";
+import { EventsProvider } from './components/EventsProvider.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { FavoritesProvider } from './context/FavoritesContext.jsx';
 
