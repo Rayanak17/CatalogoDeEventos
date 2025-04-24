@@ -1,21 +1,21 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Home from "./pages/home/home";
-import Catalogo from "./components/layout/catalogo/Catalog";
-import CatalogoCompleto from "./components/layout/catalogocompleto/catalogocompleto";
-import MapExploracao from "./components/layout/mapexploration/MapExploration";
-import LoginModal from "./components/auth/login/LoginModal";
-import CadastroModal from "./components/auth/signup/SignupModal";
-import PainelAdmin from "./pages/admin/PainelAdmin";
-import AdicionarEvento from "./pages/admin/AddEvent";
-import FavoritosPage from "./pages/favoritespage/eventsfav";
-import Sobre from "./pages/sobre/sobrenos";
-import ForgotPassword from "./components/auth/forgotpassword/ForgotPassword";  
-import Navbar from "./components/layout/navbar/navbar";
-import { EventsProvider } from "./components/EventsProvider";
-import { AuthProvider, useAuth } from './context/AuthContext';
-import { FavoritesProvider } from './context/FavoritesContext';
+import Home from '././pages/home/home.jsx'
+import Catalogo from "./components/layout/catalogo/Catalog.jsx";
+import CatalogoCompleto from "./components/layout/catalogocompleto/Catalogocompleto.jsx";
+import MapExploracao from "./components/layout/mapexploration/MapExploration.jsx";
+import LoginModal from "./components/auth/login/LoginModal.jsx";
+import CadastroModal from "./components/auth/signup/SignupModal.jsx";
+import PainelAdmin from "./pages/admin/PainelAdmin.jsx";
+import AdicionarEvento from "./pages/admin/AddEvent.jsx";
+import FavoritosPage from "./pages/favoritespage/eventsfav.jsx";
+import Sobre from "./pages/sobre/sobrenos.jsx";
+import ForgotPassword from "./components/auth/forgotpassword/ForgotPassword.jsx";  
+import Navbar from "./components/layout/navbar/navbar.jsx";
+import { EventsProvider } from "./components/EventsProvider.jsx";
+import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import { FavoritesProvider } from './context/FavoritesContext.jsx';
 
 const queryClient = new QueryClient();
 
