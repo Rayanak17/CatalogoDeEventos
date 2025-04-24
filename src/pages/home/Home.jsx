@@ -20,12 +20,6 @@ export default function Home() {
     return localStorage.getItem('theme') === 'dark';
   });
 
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    localStorage.setItem('theme', newMode ? 'dark' : 'light');
-  };
-
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add('dark-mode');
