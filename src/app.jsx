@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
 import Home from "./pages/home/home";
 import Catalogo from "./components/layout/catalogo/Catalog";
 import CatalogoCompleto from "./components/layout/catalogocompleto/catalogocompleto";
@@ -13,9 +12,7 @@ import AdicionarEvento from "./pages/admin/AddEvent";
 import FavoritosPage from "./pages/favoritespage/eventsfav";
 import Sobre from "./pages/sobre/sobrenos";
 import ForgotPassword from "./components/auth/forgotpassword/ForgotPassword";  
-
 import Navbar from "./components/layout/navbar/navbar";
-
 import { EventsProvider } from "./components/EventsProvider";
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { FavoritesProvider } from './context/FavoritesContext';
