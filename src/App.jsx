@@ -24,12 +24,12 @@ function ProtectedRoute({ element, requiredRole }) {
   
   if (loading) return <div>Carregando...</div>;
   
-  if (error) return <div>{error}</div>;
+  if (error) return <div>Ocorreu um erro. Tente novamente mais tarde.</div>;
   
-  const hasAccess = requiredRole === 'admin' 
-    ? user?.email === "teste@example.com" 
+  const hasAccess = requiredRole === 'admin'
+    ? user?.role === "admin"  // Alterado para verificar o papel de admin
     : !!user;
-    
+
   return hasAccess ? element : <Navigate to="/login" />;
 }
 
