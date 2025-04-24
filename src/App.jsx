@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Home from './pages/home/home.jsx';
+import Home from './pages/home/Home.jsx';
 import Catalogo from './components/layout/catalogo/Catalog.jsx';
 import CatalogoCompleto from './components/layout/catalogocompleto/Catalogocompleto.jsx';
 import MapExploracao from './components/layout/mapexploration/MapExploration.jsx';
@@ -11,7 +11,7 @@ import PainelAdmin from './pages/admin/PainelAdmin.jsx';
 import AdicionarEvento from './pages/admin/AddEvent.jsx'
 import FavoritosPage from './pages/favoritespage/eventsfav.jsx';
 import Sobre from './pages/sobre/sobrenos.jsx';
-import ForgotPassword from './components/auth/forgotpassword/ForgotPassword.jsx';  
+import ForgotPassword from './components/auth/forgotpassword/ForgotPassword.jsx'  
 import Navbar from './components/layout/navbar/navbar.jsx';
 import { EventsProvider } from './components/EventsProvider.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
@@ -27,7 +27,7 @@ function ProtectedRoute({ element, requiredRole }) {
   if (error) return <div>Ocorreu um erro. Tente novamente mais tarde.</div>;
   
   const hasAccess = requiredRole === 'admin'
-    ? user?.role === "admin"  // Alterado para verificar o papel de admin
+    ? user?.role === "admin" 
     : !!user;
 
   return hasAccess ? element : <Navigate to="/login" />;
