@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Home from '././pages/home/home.jsx';
+import Home from './pages/home/home.jsx';
 import Catalogo from './components/layout/catalogo/Catalog.jsx';
 import CatalogoCompleto from './components/layout/catalogocompleto/Catalogocompleto.jsx';
 import MapExploracao from './components/layout/mapexploration/MapExploration.jsx';
