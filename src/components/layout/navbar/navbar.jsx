@@ -1,39 +1,43 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import "./navbar.css";
 import { User } from "lucide-react";
 
 const Navbar = ({ onLoginClick }) => {
-  const { user, logout, favoriteEvents } = useAuth();
-
-  console.log("Usuário atual:", user); // Depuração para ver se o usuário está sendo atualizado
-
+  const { user, logout } = useAuth();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
-  const handleClickOutside = (event) => {
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setMenuOpen(false);
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
+  if (location.pathname !== '/') {
+    return null;
+  }
+
   return (
     <div className="App">
       <nav className="navbar">
-        <div className="logo">NomeSite</div>
-        <ul className="nav-links">
+        <div className="logo">JampaEvents</div>
+        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+          ☰
+        </button>
+        <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
           <li><Link to="/sobre">Sobre nós</Link></li>
           <li><Link to="/catalogocompleto">Eventos</Link></li>
           <li><Link to="/explorar">Mapa</Link></li>
-          <li><Link to="/help">Ajuda</Link></li>
+          
         </ul>
         <div className="nav-buttons">
           {user ? (
@@ -41,8 +45,7 @@ const Navbar = ({ onLoginClick }) => {
               <User className="user-icon" />
               {menuOpen && (
                 <div className="dropdown-menu">
-                  <Link to="/favoritos">Eventos Favoritos</Link> {/* Atualizado para /favoritos */}
-                  {/* Link exclusivo do admin */}
+                  <Link to="/favoritos">Eventos Favoritos</Link>
                   {user?.email === "teste@example.com" && (
                     <Link to="/admin/adicionar">Adicionar Evento</Link>
                   )}

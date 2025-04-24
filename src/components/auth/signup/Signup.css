@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* overlay */
+  .modal-overlay.signup-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+  }
+
+  .left-side .login-link {
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    background: none;
+    border: 2px solid white;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    z-index: 2;
+  }
+  
+  .left-section .login-link :hover {
+    background: #5f0bcf;
+  }
+  
+  /* container principal */
+  .modal-content.signup-content {
+    position: relative;
+    display: flex;
+    width: 700px;
+    height: 390px;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  
+  /* PAINEL ROXO – LADO ESQUERDO */
+  .left-side {
+    position: relative;
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    color: #fff;
+    z-index: 1;
+  }
+  
+  .left-side .highlight {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  
+  .left-side p {
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 24px;
+  }
+  
+  /* curva meia-lua do painel */
+  .modal-content.signup-content::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45%;
+    height: 100%;
+    background: #7c18ec;
+    border-radius: 0 120px 120px 0;
+    z-index: 0;
+  }
+  /* Botão “Cadastrar” na .right-side, usando a mesma estrutura que você passou */
+.right-side .signup-link {
+    align-self: flex-end;
+    max-width: 160px;
+    margin-top: 4px;
+    padding: 12px;
+    background: #7c18ec;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%; 
+}
+
+  .right-side .signup-link:hover {
+    background: #5f0bcf;
+  }
+  
+  .right-side .signup-link:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #e2e2e2;
+    color: #b0b0b0;
+  }
+  
+  /* FORMULÁRIO – LADO DIREITO */
+  .right-side {
+    position: relative;
+    flex: 1;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+  }
+  
+  .right-side h2 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: -1px;
+  }
+  
+  .right-side .error-message {
+    font-size: 12px;
+    font-weight: 500;
+    color: #d32f2f;
+    margin-bottom: 4px;
+    margin-top: -4px;
+  }
+  
+  .right-side form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 250px;
+    width: 100%;
+  }
+  
+  .right-side input {
+    width: 100%;
+    padding: 6px 10px; /* Ajustado para inputs menores */
+    background: #e2e2e2;
+    border: none;
+    border-radius: 8px; /* Ajustado o border-radius */
+    font-size: 13px; /* Reduzido o tamanho da fonte */
+    color: #333;
+    outline: none;
+  }
+  
+  .right-side input:focus {
+    box-shadow: 0 0 0 2px rgba(123, 76, 177, 0.3);
+  }
+
+  .left-side .login-text {
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 12px;              /* sobe um pouco para perto da borda */
+    right: 12px;            /* afasta um pouco da borda */
+    padding: 8px;           /* cria área de clique extra ao redor do “X” */
+    background: rgba(255,255,255,0.0); /* fundo transparente */
+    border: none;
+    font-size: 24px;
+    line-height: 1;         /* centraliza melhor o “X” verticalmente */
+    color: #333;
+    cursor: pointer;
+    z-index: 10;            /* garante estar acima de tudo */
+    transition: background 0.2s ease;
+  }
+  
+  .close-modal:hover {
+    background: rgba(0,0,0,0.05); /* sutil feedback de hover */
+  }
+  

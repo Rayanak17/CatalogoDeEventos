@@ -1,134 +1,182 @@
-/* Container principal */
+/* reset + fonte */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* overlay */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  inset: 0;
+  background: rgba(0,0,0,0.2);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
 }
 
-/* Modal */
+/* container principal */
 .modal-content {
-  width: 400px; /* Largura ajustada para o modal */
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  padding: 30px;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
   position: relative;
+  display: flex;
+  width: 1200px;
+  height: 390px;
+  background: #fafafa;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+.modal-overlay .modal-content {
+  width: 700px !important; /* ou outro valor desejado */
+  max-width: 100% !important;  /* Garante que não vai ultrapassar o limite da tela */
 }
 
-/* Botão de fechar */
-.modal-content .close-modal {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #666;
-}
 
-.modal-content .close-modal:hover {
-  color: #333;
-}
-
-/* Título */
-.modal-content .modal-content h2 {
-  font-size: 28px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-/* Textos */
-.modal-content .modal-content p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-.modal-content .highlight {
-  font-size: 16px;
-  color: #6c27ff;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-/* Formulário */
-.modal-content .modal-content form {
+/* ESQUERDA */
+.left-section {
+  flex: 1;
+  padding: 40px 30px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+}
+
+.left-section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 16px;
+}
+
+.left-section .subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
   margin-bottom: 20px;
 }
 
-.modal-content .modal-content input {
+.left-section form {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.left-section input {
+  width: 100%;
+  padding: 12px 16px;
+  background: #e2e2e2;
+  border: none;
+  border-radius: 12px;
   font-size: 14px;
+  color: #333;
   outline: none;
 }
 
-.modal-content input::placeholder {
-  color: #999;
+.left-section input:focus {
+  box-shadow: 0 0 0 2px rgba(123, 76, 177, 0.3);
 }
 
-.modal-content input:focus {
-  border-color: #6c27ff;
-}
-
-/* Botão de Entrar */
-.modal-content form button {
-  width: 100%;
+.left-section button[type="submit"] {
+  margin-top: 8px;
   padding: 12px;
-  background-color: #6c27ff;
+  background: #7c18ec;
   color: white;
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 12px;
   cursor: pointer;
-  text-transform: uppercase;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s;
 }
 
-.modal-content form button:hover {
-  background-color: #3d2472;
+.left-section button[type="submit"]:hover {
+  background: #5f0bcf;
 }
 
-/* Link de Cadastro */
-.signup-link {
+.left-section .forgot-password {
+  margin-top: 4px;
   background: none;
   border: none;
-  color: #6c27ff;
-  font-size: 14px;
-  font-weight: bold;
+  color: #333;
+  font-size: 13px;
+  text-decoration: underline;
   cursor: pointer;
-  text-decoration: underline;
-  margin-bottom: 10px;
+  align-self: flex-end;
 }
 
-.signup-link:hover {
-  color: #3d2472;
+.left-section .error-message {
+  font-size: 12px;
+  color: red;
+  margin-bottom: 8px;
 }
 
-/* Link "Esqueceu a senha?" */
-.forgot-password {
-  color: #6c27ff;
+/* DIREITA – forma de meia-lua roxa */
+.modal-content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  height: 100%;
+  background: #7c18ec;
+  border-radius: 120px 0 0 120px;
+  z-index: 0;
+}
+
+/* conteúdo da direita */
+.right-section {
+  position: relative;
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  color: white;
+  text-align: center;
+}
+
+.right-section .theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 8px;
+  padding: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.right-section .highlight {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.right-section .signup-text {
+  font-size: 12px;
+  line-height: 1.4;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.right-section .signup-link {
+  padding: 10px 24px;
   font-size: 14px;
-  text-decoration: none;
+  font-weight: 600;
+  background: none;
+  border: 2px solid white;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
 }
 
-.forgot-password:hover {
-  text-decoration: underline;
+.right-section .signup-link:hover {
+  background: white;
+  color: #7c18ec;
 }

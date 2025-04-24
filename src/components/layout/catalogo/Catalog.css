@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  display: flex;
   justify-content: space-between;  /* Para espaçar os elementos */
 }
 
@@ -22,11 +21,8 @@
 
 .title {
   font-size: 35px;
-  font-weight: 600;
   color: #2d3748;
   text-align: center; /* Garante que o título fique alinhado à esquerda */
-  margin: auto;
-  width: 100%;
 }
 
 .search-container {
@@ -112,6 +108,15 @@
   margin-bottom: -3px;  /* Menor espaço entre a data e a descrição */
 }
 
+.event-list {
+  display: grid;
+  grid-template-columns: 1fr; /* Padrão para mobile */
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+
 .error-message {
   color: red;
   font-size: 1rem;
@@ -119,8 +124,29 @@
   margin-top: 16px;
 }
 
+.explore-btn {
+  background-color: #8d52e5;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 24px;
+  transition: background-color 0.3s ease;
+}
 
-/* Configuração de grid para diferentes larguras de tela */
+.explore-btn:hover {
+  background-color: #51188f;
+}
+
+@media (max-width: 480px) {
+  .explore-btn {
+    width: 100%;
+  }
+}
+
 @media (min-width: 640px) {
   .event-list {
     grid-template-columns: 1fr 1fr; /* 2 cards por linha */
@@ -130,6 +156,12 @@
 @media (min-width: 768px) {
   .event-list {
     grid-template-columns: 1fr 1fr 1fr; /* 3 cards por linha */
+  }
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 35px;
   }
 }
 

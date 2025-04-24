@@ -3,7 +3,7 @@ import { Search } from "lucide-react";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { useFavorites } from "../../../context/FavoritesContext";
-import { useAuth } from "../../../context/AuthContext"; // 🔥 Importa o contexto de autenticação
+import { useAuth } from "../../../context/AuthContext";
 import axios from "axios";
 import "./CatalogoCompleto.css";
 
@@ -16,8 +16,10 @@ export default function CatalogoCompleto() {
     priceFilter: "all",
   });
 
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
+
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
-  const { user } = useAuth(); // 🔥 Acessa o usuário logado
+  const { user } = useAuth();
 
   const fetchEvents = async () => {
     try {
@@ -52,7 +54,7 @@ export default function CatalogoCompleto() {
     return { tomorrow, thisWeekend, nextWeek, nextMonth };
   };
 
-  const { tomorrow, thisWeekend, nextWeek, nextMonth } = useMemo(getFilterDates, [now]);
+  const { tomorrow, thisWeekend, nextWeek, nextMonth } = useMemo(() => getFilterDates(), []);
 
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
@@ -74,9 +76,12 @@ export default function CatalogoCompleto() {
 
       const matchesSearch = event.eventTitle.toLowerCase().includes(filters.search.toLowerCase());
 
-      return isUpcoming && matchesDate && matchesPrice && matchesSearch;
+      const matchesCategory =
+        categoriaSelecionada === "" || String(event.categoryId) === categoriaSelecionada;
+
+      return isUpcoming && matchesDate && matchesPrice && matchesSearch && matchesCategory;
     });
-  }, [events, filters]);
+  }, [events, filters, categoriaSelecionada]);
 
   const handleFavoriteClick = (event) => {
     if (!user) {
@@ -84,7 +89,7 @@ export default function CatalogoCompleto() {
       return;
     }
 
-    toggleFavorite(event);
+    toggleFavorite(event); // Chamando a função do context para alternar o favorito
   };
 
   return (
@@ -113,8 +118,25 @@ export default function CatalogoCompleto() {
             <option value="today">Hoje</option>
             <option value="tomorrow">Amanhã</option>
             <option value="weekend">Este fim de semana</option>
-            <option value="next7days">Próximos 7 dias</option>
+            <option value="next7days">Próxima semana</option>
             <option value="nextMonth">Este mês</option>
+          </select>
+
+          <select
+            id="categoria"
+            value={categoriaSelecionada}
+            onChange={(e) => setCategoriaSelecionada(e.target.value)}
+          >
+            <option value="">Categoria</option>
+            <option value="1">Turísticos</option>
+            <option value="2">Religiosos</option>
+            <option value="3">Culturais</option>
+            <option value="4">De lazer</option>
+            <option value="5">Desportivos</option>
+            <option value="6">Artísticos</option>
+            <option value="7">Cívicos</option>
+            <option value="8">Científicos</option>
+            <option value="9">Promocionais</option>
           </select>
 
           <select
@@ -152,18 +174,14 @@ export default function CatalogoCompleto() {
               <h2 className="event-name">{event.eventTitle}</h2>
               <p className="event-description">{event.eventDescription}</p>
 
-              {/* Botão de favoritar (só aparece se o usuário estiver logado) */}
-              {user && (
+              {user ? (
                 <button
                   className={`favorite-button ${isFavorite(event.eventId) ? "filled" : ""}`}
                   onClick={() => handleFavoriteClick(event)}
                 >
                   {isFavorite(event.eventId) ? <FaHeart /> : <FaRegHeart />}
                 </button>
-              )}
-
-              {/* Alternativa: alerta se não estiver logado */}
-              {!user && (
+              ) : (
                 <button
                   className="favorite-button"
                   onClick={() => alert("Você precisa estar logado para favoritar um evento.")}

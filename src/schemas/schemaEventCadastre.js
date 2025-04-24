@@ -62,5 +62,5 @@ export const eventSchema = Joi.object({
     .optional()
     .messages({
       "any.only": "Nível de acessibilidade inválido",
-    }),
+    })
 });

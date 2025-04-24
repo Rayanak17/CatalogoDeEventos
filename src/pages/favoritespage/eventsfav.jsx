@@ -1,63 +1,25 @@
+// src/pages/favoritespage/EventsFav.jsx
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { useFavorites } from '../../context/FavoritesContext';
+import { useNavigate } from 'react-router-dom';
 import './eventsfav.css';
 
 const EventsFav = () => {
   const { user } = useAuth();
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
-      const userServiceUrl = 'https://user-service-eventscatalog.onrender.com/favorites';
-      const userRecentCadastreId = user.id;
-
-      const fetchUserFavorites = async () => {
-        try {
-          if (!userRecentCadastreId) {
-            throw new Error('ID do usuário ausente');
-          }
-
-          const token = localStorage.getItem('token');
-          const url = `${userServiceUrl}/list?userId=${userRecentCadastreId}`;
-
-          const response = await axios.get(url, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if (response.status === 200) {
-            setLoading(false);
-          } else {
-            throw new Error('Falha ao carregar favoritos');
-          }
-        } catch (error) {
-          if (error.response) {
-            setError(`Erro ${error.response.status}: ${error.response.data.message}`);
-          } else {
-            setError(error.message);
-          }
-          setLoading(false);
-        }
-      };
-
-      fetchUserFavorites();
-    } else {
-      setLoading(false);
-    }
-  }, [user]);
+    setLoading(false);
+  }, []);
 
   if (!user) {
     return (
-      <div className="events-favorites">
+      <div className="favorites-page">
         <p>Por favor, faça login para ver seus eventos favoritos.</p>
-        <button className="fav-btn" onClick={() => navigate('/login')}>
+        <button className="login-btn" onClick={() => navigate('/login')}>
           Ir para Login
         </button>
       </div>
@@ -66,54 +28,98 @@ const EventsFav = () => {
 
   if (loading) {
     return (
-      <div className="events-favorites">
+      <div className="favorites-page">
         <p>Carregando seus eventos favoritos...</p>
       </div>
     );
   }
 
-  if (error) {
-    return (
-      <div className="events-favorites">
-        <h2>Erro ao carregar favoritos</h2>
-        <p>{error}</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="events-favorites">
-      <h2>Eventos Favoritos de {user?.name || 'Usuário'}</h2>
+    <div className="favorites-page">
+      <h2>Eventos Favoritos</h2>
+
       {favorites.length > 0 ? (
-        <ul className="fav-event-list">
-          {favorites.map((event, index) => (
-            <li key={index} className="fav-card">
-              <div className="fav-header">
-                <h3>{event.title}</h3>
-                <span
-                  className="heart-icon"
-                  onClick={() => toggleFavorite(event)}
-                >
-                  {isFavorite(event.eventId) ? '❤️' : '🤍'}
-                </span>
-              </div>
-              <div className="fav-info">
-                <p>{event.date}</p>
-                <p>{event.location}</p>
-              </div>
-              <p className="fav-description">{event.description}</p>
-              {event.mapImage && (
-                <img
-                  src={event.mapImage}
-                  alt="Mapa do evento"
-                  className="fav-map-img"
-                />
-              )}
-              <button className="fav-btn" onClick={() => toggleFavorite(event)}>
-                {isFavorite(event.eventId) ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos'}
-              </button>
-            </li>
-          ))}
+        <ul className="favorites-list">
+          {favorites.map((event) => {
+            const start = new Date(event.startDateTime);
+            const dateStr = isNaN(start)
+              ? 'Data não informada'
+              : start.toLocaleDateString('pt-BR');
+            const timeStr = isNaN(start)
+              ? 'Horário não informado'
+              : start.toLocaleTimeString('pt-BR', {
+                  hour: '2-digit',
+                  minute: '2-digit'
+                });
+            const address = [
+              event.eventAddressStreet,
+              event.eventAddressNumber,
+              event.eventAddressComplement,
+              event.eventAddressNeighborhood
+            ]
+              .filter(Boolean)
+              .join(', ');
+
+            return (
+              <li key={event.eventId} className="favorite-card">
+                <div className="favorite-card-left">
+                  <div className="favorite-card-header">
+                    <h3>{event.eventTitle}</h3>
+                    <span
+                      className="favorite-toggle"
+                      onClick={() => toggleFavorite(event)}
+                    >
+                      {isFavorite(event.eventId) ? '❤️' : '🤍'}
+                    </span>
+                  </div>
+
+                  <div className="favorite-card-info">
+                    <p>
+                      <strong>Data:</strong> {dateStr}
+                    </p>
+                    <p>
+                      <strong>Horário:</strong> {timeStr}
+                    </p>
+                    <p>
+                      <strong>Endereço:</strong> {address || 'Não informado'}
+                    </p>
+                  </div>
+
+                  <p className="favorite-card-description">
+                    {event.eventDescription}
+                  </p>
+
+                  <div className="favorite-card-tags">
+                    <span className="favorite-tag">A partir de xxx</span>
+                    <span className="favorite-tag">Artístico</span>
+                  </div>
+
+                  <a
+                    href={event.eventUrl}
+                    className="favorite-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Website do evento
+                  </a>
+                </div>
+
+                <div className="favorite-card-map">
+                  {event.latitude && event.longitude ? (
+                    <img
+                      src={`https://event-service-eventscatalog.onrender.com/map?latitude=${event.latitude}&longitude=${event.longitude}`}
+                      alt="Mapa do evento"
+                      className="favorite-map-img"
+                    />
+                  ) : (
+                    <div className="favorite-no-img">
+                      Imagem não disponível
+                    </div>
+                  )}
+                </div>
+              </li>
+            );
+          })}
         </ul>
       ) : (
         <p>Você ainda não tem eventos favoritos.</p>

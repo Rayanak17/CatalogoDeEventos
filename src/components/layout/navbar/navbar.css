@@ -1,168 +1,219 @@
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #ffffff;
-    color: #333;
-    overflow-x: hidden;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  color: #333;
+  overflow-x: hidden;
 }
 
 .navbar { /* Adicionando ponto (.) para selecionar a classe navbar */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 20px 40px;
-    background-color: #f5f5f5;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 40px;
+  background-color: #f5f5f5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  box-sizing: border-box;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #000000;
-    margin-left: 140px; /* Logo fixa no lugar */
+  font-size: 24px;
+  font-weight: bold;
+  color: #000000;
+  margin-left: 140px; /* Logo fixa no lugar */
 }
 
 .nav-links {
-    font-size: 17px;
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    padding: 0;
-    margin: 0;
-    flex-grow: 1; /* Permite que os links ocupem o espaço restante */
-    justify-content: center; /* Centraliza os links */
+  font-size: 17px;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; /* Permite que os links ocupem o espaço restante */
+  justify-content: center; /* Centraliza os links */
 }
 
 .nav-links li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 600;
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
 }
 
 .nav-links li a:hover {
-    color: #6a1b9a;
+  color: #6a1b9a;
 }
 
 .login-btn {
-    padding: 7px 19px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #6a1b9a;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 150px; /* Login fixa no lugar */
+  padding: 7px 19px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #6a1b9a;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 150px; /* Login fixa no lugar */
 }
 
 .login-btn:hover {
-    background-color: #4a0c6b;
+  background-color: #4a0c6b;
 }
 
 .user-menu {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .user-menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 2px 5px; /* Mesmo padding do botão de login */
-    font-size: 13px;
-    font-weight: bold;
-    color: #000000;
-    border-radius: 5px;
-    transition: background 0.3s;
-    margin-right: 150px; /* Mesma margem do login */
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px 5px; /* Mesmo padding do botão de login */
+  font-size: 13px;
+  font-weight: bold;
+  color: #000000;
+  border-radius: 5px;
+  transition: background 0.3s;
+  margin-right: 150px; /* Mesma margem do login */
 }
 
 .user-menu:hover {
-    background-color: #ac88bf;
+  background-color: transparent; /* Removendo a animação roxa */
 }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    min-width: 150px;
-    z-index: 1000;
-  }
-  
-  .dropdown-menu a {
+
+@media (max-width: 768px) {
+  .menu-toggle {
     display: block;
-    color: #333;
-    padding: 8px 12px;
-    text-decoration: none;
-    border-radius: 3px;
-    transition: background 0.3s;
-  }
-  
-  .dropdown-menu a:hover {
-    background: #f0f0f0;
-  }
-  
-  .logout-btn {
-    justify-content: center;
-    width: 50%;
-    background: #dc3545;
-    color: white;
-    padding: 6px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-    margin-top: 10px;
-  }
-  
-  .logout-btn:hover {
-    background: #b02a37;
+    position: absolute;
+    right: 30px;
+    top: 25px;
   }
 
-  .dropdown-menu {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-end; /* Alinha os links no canto direito */
     position: absolute;
-    right: 10px;
-    top: 40px;
+    top: 70px;
+    right: 0;
+    width: 200px; /* Largura do menu no mobile */
+    background-color: #f5f5f5;
+    padding: 20px 15px;
     z-index: 999;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 0 10px; /* Cantos arredondados à esquerda embaixo */
   }
-  
-  .dropdown-menu a {
-    display: block;
-    padding: 8px 12px;
-    color: #333;
-    text-decoration: none;
-    transition: background 0.2s ease;
+
+  .nav-links.active {
+    display: flex;
   }
-  
-  .dropdown-menu a:hover {
-    background: #f0f0f0;
-    border-radius: 6px;
+
+  .nav-links li {
+    margin: 10px 0;
   }
-  
-  /* Destaque pro link de admin */
-  .dropdown-menu a.admin-link {
-    font-weight: bold;
-    color: #007bff;
+
+  .logo {
+    margin-left: 0;
   }
-  
-  .dropdown-menu a.admin-link:hover {
-    background-color: #e0f0ff;
+
+  .login-btn,
+  .user-menu {
+    margin-right: 0;
   }
-  
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  min-width: 150px;
+  z-index: 1000;
+}
+
+.dropdown-menu a {
+  display: block;
+  color: #333;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background 0.3s;
+}
+
+.dropdown-menu a:hover {
+  background: #f0f0f0;
+}
+
+.logout-btn {
+  justify-content: center;
+  width: 50%;
+  background: #dc3545;
+  color: white;
+  padding: 6px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.logout-btn:hover {
+  background: #b02a37;
+}
+
+.dropdown-menu {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+
+/* Destaque pro link de admin */
+.dropdown-menu a.admin-link {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.dropdown-menu a.admin-link:hover {
+  background-color: #e0f0ff;
+}
+
+/* ...seu CSS existente... */
+
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  z-index: 1001;
+}

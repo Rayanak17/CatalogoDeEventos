@@ -1,34 +1,31 @@
-import React, { useState } from 'react';
-import './AddEvent.css'; // Certifique-se de que o caminho do CSS está correto
+import { useState } from "react";
+import "./AddEvent.css"; // Certifique-se de que o caminho do CSS está correto
+import { eventSchema } from "../../schemas/schemaEventCadastre";
+import { schemaId } from "../../schemas/schemaId";
+import { useEvents } from "../../context/eventsContext";
+import eventsApi from "../../eventsApi";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const AddEvent = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    eventTitle: '',
-    eventDescription: '',
-    eventLink: '',
+    eventTitle: "",
+    eventDescription: "",
+    eventLink: "",
     eventPrice: 0,
-    eventAddressStreet: '',
-    eventAddressNumber: '',
-    eventAddressNeighborhood: '',
-    eventAddressComplement: '',
-    startDateTime: '',
-    endDateTime: '',
-    eventAccessibilityLevel: '',
-    eventCategoryId: '',
-    eventOrganizerId: ''
+    eventAddressStreet: "",
+    eventAddressNumber: "",
+    eventAddressNeighborhood: "",
+    eventAddressComplement: "",
+    startDateTime: "",
+    endDateTime: "",
+    eventAccessibilityLevel: "",
+    eventCategoryId: "",
+    eventOrganizerId: "",
   });
 
-  const organizers = [
-    { id: '1', name: 'Organizador A' },
-    { id: '2', name: 'Organizador B' },
-    { id: '3', name: 'Organizador C' }
-  ];
-
-  const categories = [
-    { id: '1', name: 'Categoria 1' },
-    { id: '2', name: 'Categoria 2' },
-    { id: '3', name: 'Categoria 3' }
-  ];
+  const { organizers, categories } = useEvents();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -38,10 +35,61 @@ const AddEvent = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    alert('Evento adicionado com sucesso!');
+    const { eventOrganizerId, eventCategoryId, ...dataEvent } = formData;
+  
+    // Remove campos com string vazia ou undefined
+    const cleanedFormData = Object.fromEntries(
+      Object.entries(dataEvent).filter(
+        ([, value]) => value !== "" && value !== undefined
+      )
+    );
+  
+    console.log("Dados antes de enviar para o servidor:", cleanedFormData);
+  
+    try {
+      // Validação no cliente
+      await Promise.all([
+        eventSchema.validateAsync(cleanedFormData),
+        schemaId.validateAsync({ id: eventCategoryId }),
+        schemaId.validateAsync({ id: eventOrganizerId }),
+      ]);
+    } catch (error) {
+      console.log(error);
+      alert("Erro na validação: " + error.message);
+      return;  // Para a execução caso falhe a validação
+    }
+  
+    const formatted = {
+      ...cleanedFormData,
+      eventCategoryId,
+      eventOrganizerId,
+      startDateTime: new Date(cleanedFormData.startDateTime).toISOString(),
+      ...(cleanedFormData.endDateTime && {
+        endDateTime: new Date(cleanedFormData.endDateTime).toISOString(),
+      }),
+    };
+  
+    console.log("Dados formatados antes do POST:", formatted);
+  
+    try {
+      const response = await eventsApi.post("/events", formatted);
+      console.log("Resposta da API:", response.data);
+      alert("Evento adicionado com sucesso!");
+      navigate("/eventos");  // Redireciona para a página de eventos após adicionar com sucesso
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 500) {
+          alert("Erro no servidor: Tente novamente mais tarde.");
+        } else {
+          alert("Erro na requisição: " + error.message);
+        }
+      } else {
+        console.error("Erro inesperado", error);
+        alert("Erro inesperado");
+      }
+    }
   };
 
   return (
@@ -183,7 +231,9 @@ const AddEvent = () => {
 
         <div className="form-row">
           <div className="input-group">
-            <label htmlFor="eventAccessibilityLevel">Nível de Acessibilidade:</label>
+            <label htmlFor="eventAccessibilityLevel">
+              Nível de Acessibilidade:
+            </label>
             <select
               id="eventAccessibilityLevel"
               name="eventAccessibilityLevel"
@@ -192,10 +242,18 @@ const AddEvent = () => {
             >
               <option value="">Selecione</option>
               <option value="SEM_ACESSIBILIDADE">Sem Acessibilidade</option>
-              <option value="ACESSIBILIDADE_BASICA">Acessibilidade Básica</option>
-              <option value="ACESSIBILIDADE_AUDITIVA">Acessibilidade Auditiva</option>
-              <option value="ACESSIBILIDADE_VISUAL">Acessibilidade Visual</option>
-              <option value="ACESSIBILIDADE_COMPLETA">Acessibilidade Completa</option>
+              <option value="ACESSIBILIDADE_BASICA">
+                Acessibilidade Básica
+              </option>
+              <option value="ACESSIBILIDADE_AUDITIVA">
+                Acessibilidade Auditiva
+              </option>
+              <option value="ACESSIBILIDADE_VISUAL">
+                Acessibilidade Visual
+              </option>
+              <option value="ACESSIBILIDADE_COMPLETA">
+                Acessibilidade Completa
+              </option>
             </select>
           </div>
 
@@ -208,9 +266,9 @@ const AddEvent = () => {
               onChange={handleInputChange}
             >
               <option value="">Selecione uma Categoria</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
+              {categories && categories.map((category) => (
+                <option key={category.categoryId} value={category.categoryId}>
+                  {category.categoryName}
                 </option>
               ))}
             </select>
@@ -227,9 +285,12 @@ const AddEvent = () => {
               onChange={handleInputChange}
             >
               <option value="">Selecione um Organizador</option>
-              {organizers.map((organizer) => (
-                <option key={organizer.id} value={organizer.id}>
-                  {organizer.name}
+              {organizers && organizers.map((organizer) => (
+                <option
+                  key={organizer.organizerId}
+                  value={organizer.organizerId}
+                >
+                  {organizer.organizerName}
                 </option>
               ))}
             </select>

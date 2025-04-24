@@ -1,95 +1,191 @@
-.events-favorites {
-  padding: 2rem;
-  background-color: #f8f9fa;
-  min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.events-favorites h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+.favorites-page {
+  max-width: 800px;           /* antes 1000px */
+  margin: 1.6rem auto;        /* antes 2rem */
+  padding: 0 0.8rem;          /* antes 1rem */
+  font-family: 'Poppins', sans-serif;
   color: #333;
-  text-align: center;
 }
 
-.fav-event-list {
+.favorites-page h2 {
+  font-size: 1.44rem;         /* antes 1.8rem */
+  margin-bottom: 1.2rem;      /* antes 1.5rem */
+  font-weight: 600;
+}
+
+.favorites-page > p {
+  text-align: center;
+  color: #666;
+  font-size: 0.8rem;          /* antes 1rem */
+}
+
+/* botão de login */
+.login-btn {
+  display: inline-block;
+  margin-top: 0.8rem;         /* antes 1rem */
+  padding: 0.48rem 0.96rem;   /* antes 0.6rem 1.2rem */
+  background: #1ebea5;
+  color: white;
+  border: none;
+  border-radius: 4.8px;       /* antes 6px */
+  cursor: pointer;
+  font-size: 0.76rem;         /* antes 0.95rem */
+  transition: background .2s;
+}
+
+.login-btn:hover {
+  background: #17a38a;
+}
+
+/* lista de cartões */
+.favorites-list {
   list-style: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-}
-
-.fav-card {
-  background-color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  transition: 0.3s ease;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 1.2rem;                /* antes 1.5rem */
 }
 
-.fav-card:hover {
-  transform: translateY(-4px);
+/* cartão de favorito */
+.favorite-card {
+  display: flex;
+  background: oklch(92% 0.004 286.32);
+  border-radius: 9.6px;       /* antes 12px */
+  overflow: hidden;
+  box-shadow: 0 1.6px 4.8px rgba(0,0,0,0.1); /* antes 0 2px 6px */
+  transition: transform .2s, box-shadow .2s;
 }
 
-.fav-header {
+.favorite-card:hover {
+  transform: translateY(-3.2px);               /* antes -4px */
+  box-shadow: 0 4.8px 9.6px rgba(0,0,0,0.15);  /* antes 0 6px 12px */
+}
+
+/* lado esquerdo do cartão */
+.favorite-card-left {
+  flex: 1;
+  padding: 1.2rem;            /* antes 1.5rem */
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;                /* antes 0.75rem */
+}
+
+/* header com título + coração */
+.favorite-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
 }
 
-.fav-header h3 {
-  font-size: 1.25rem;
-  color: #222;
+.favorite-card-header h3 {
+  margin: 0;
+  font-size: 1.04rem;         /* antes 1.3rem */
+  font-weight: 600;
+}
+
+.favorite-toggle {
+  width: 25.6px;              /* antes 32px */
+  height: 25.6px;             /* antes 32px */
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.96rem;         /* antes 1.2rem */
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.favorite-toggle:hover {
+  background: #ffd6e0;
+}
+
+/* seção de informações */
+.favorite-card-info {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.4rem 1.6rem;         /* antes 0.5rem 2rem */
+  font-size: 0.72rem;         /* antes 0.9rem */
+}
+
+.favorite-card-info p {
   margin: 0;
 }
 
-.heart-icon {
-  font-size: 1.5rem;
-  color: #e91e63;
-  cursor: pointer;
+.favorite-card-info strong {
+  font-weight: 500;
 }
 
-.fav-info {
-  margin-bottom: 0.75rem;
+/* descrição do evento */
+.favorite-card-description {
+  font-size: 0.76rem;         /* antes 0.95rem */
   color: #444;
+  line-height: 1.12;          /* antes 1.4 */
+  flex: 1;
 }
 
-.fav-info p {
-  margin: 0.25rem 0;
-  font-size: 0.95rem;
+/* tags do evento */
+.favorite-card-tags {
+  display: flex;
+  gap: 0.4rem;                /* antes 0.5rem */
 }
 
-.fav-description {
-  margin: 0.75rem 0;
-  font-size: 0.95rem;
-  color: #555;
+.favorite-tag {
+  background: #1ebea5;
+  color: #fff;
+  padding: 0.24rem 0.64rem;   /* antes 0.3rem 0.8rem */
+  border-radius: 16px;        /* antes 20px */
+  font-size: 0.64rem;         /* antes 0.8rem */
 }
 
-.fav-map-img {
+/* link para site */
+.favorite-link {
+  margin-top: 0.8rem;         /* antes 1rem */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;               /* antes 0.4rem */
+  color: #1ebea5;
+  text-decoration: none;
+  font-size: 0.72rem;         /* antes 0.9rem */
+}
+
+.favorite-link:hover {
+  text-decoration: underline;
+}
+
+/* lado direito: mapa */
+.favorite-card-map {
+  flex: 1;
+  min-width: 240px;           /* antes 300px */
+  max-width: 320px;           /* antes 400px */
+  position: relative;
+}
+
+.favorite-map-img {
   width: 100%;
-  border-radius: 8px;
-  margin: 1rem 0;
+  height: 100%;
   object-fit: cover;
-  max-height: 200px;
 }
 
-.fav-btn {
-  align-self: flex-start;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.favorite-no-img {
+  width: 100%;
+  height: 100%;
+  background: #dcdcdc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 0.72rem;         /* antes 0.9rem */
 }
 
-.fav-btn:hover {
-  background-color: #0056b3;
+/* responsivo: empilha em mobile */
+@media (max-width: 768px) {
+  .favorite-card {
+    flex-direction: column;
+  }
+
+  .favorite-card-map {
+    min-height: 144px;        /* antes 180px */
+    max-width: none;
+  }
 }

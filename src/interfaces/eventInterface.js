@@ -64,6 +64,5 @@ export function createEvent({
     eventAccessibilityLevel,
     eventCategoryId,
     eventOrganizerId,
-    createdAt: new Date(), // Definindo data de criação automaticamente
   };
 }

@@ -1,29 +1,139 @@
 .footer {
-    background-color: #593a79;
-    color: #fff;
-    padding: 20px;
+  background-color: #6a1b9a;
+  color: #c9d1d9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px 20px;
+}
+
+.footer-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-dev {
+  font-size: 14px;
+  margin: 0;
+}
+
+.footer-dev strong {
+  color: #ffffff;
+}
+
+.footer-link {
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-copy {
+  font-size: 14px;
+  color: #8b949e;
+  margin: 0;
+}
+
+.footer-names {
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: right;
+  margin-bottom: 4px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap; /* Garante que os ícones se ajustem melhor em telas pequenas */
+  justify-content: center;
+}
+
+.social-icons img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+  filter: brightness(0) invert(1);
+}
+
+.social-icons img:hover {
+  transform: scale(1.15);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .footer-wrapper {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    gap: 20px;
   }
-  
-  .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
+
+  .footer-left, .footer-right {
+    align-items: center;
+    text-align: center;
+    width: 90%; 
   }
-  
-  .footer-links {
-    margin-top: 10px;
+
+  .footer-names {
+    text-align: center;
+    font-size: 14px;
   }
-  
-  .footer-links a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 15px;
+
+  .social-icons {
+    justify-content: center; 
   }
-  
-  .footer-links a:hover {
-    text-decoration: underline;
+
+  .footer-dev {
+    font-size: 12px; 
   }
-  
+
+  .footer-link {
+    font-size: 14px; 
+  }
+
+  .footer-copy {
+    font-size: 12px; 
+  }
+}
+
+@media (max-width: 480px) {
+
+  .footer-left, .footer-right {
+    width: 100%; 
+  }
+
+  .footer-names {
+    font-size: 12px; 
+  }
+
+  .social-icons img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .footer-dev {
+    font-size: 10px; 
+  }
+
+  .footer-link {
+    font-size: 12px; 
+  }
+
+  .footer-copy {
+    font-size: 10px; 
+  }
+}

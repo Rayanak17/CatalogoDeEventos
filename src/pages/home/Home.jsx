@@ -81,9 +81,6 @@ export default function Home() {
       </section>
 
       {/* Botão de ajuda */}
-      <Button onClick={() => setShowHelpModal(true)} ariaLabel="Abrir ajuda" className="help-button">
-        <HelpCircle size={24} />
-      </Button>
 
       {showHelpModal && <HelpModal onClose={() => setShowHelpModal(false)} />}
 

@@ -12,9 +12,9 @@ import PainelAdmin from "./pages/admin/PainelAdmin";
 import AdicionarEvento from "./pages/admin/AddEvent";
 import FavoritosPage from "./pages/favoritespage/eventsfav";
 import Sobre from "./pages/sobre/sobrenos";
+import ForgotPassword from "./components/auth/forgotpassword/ForgotPassword";  
 
-
-import Navbar from "./components/layout/navbar/navbar"
+import Navbar from "./components/layout/navbar/navbar";
 
 import { EventsProvider } from "./components/EventsProvider";
 import { AuthProvider, useAuth } from './context/AuthContext';
@@ -22,17 +22,18 @@ import { FavoritesProvider } from './context/FavoritesContext';
 
 const queryClient = new QueryClient();
 
-function PrivateRoute({ element }) {
-  const { user, loading } = useAuth();
+function ProtectedRoute({ element, requiredRole }) {
+  const { user, loading, error } = useAuth();
+  
   if (loading) return <div>Carregando...</div>;
-  return user ? element : <Navigate to="/login" />;
-}
-
-function AdminRoute({ element }) {
-  const { user, loading } = useAuth();
-  if (loading) return <div>Carregando...</div>;
-  const isAdmin = user?.email === "teste@example.com";
-  return isAdmin ? element : <Navigate to="/login" />;
+  
+  if (error) return <div>{error}</div>;
+  
+  const hasAccess = requiredRole === 'admin' 
+    ? user?.email === "teste@example.com" 
+    : !!user;
+    
+  return hasAccess ? element : <Navigate to="/login" />;
 }
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <EventsProvider>
             <BrowserRouter>
-              <Navbar /> {/* <-- Aqui está a Navbar sendo renderizada em todas as rotas */}
+              <Navbar />
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/catalogo" element={<Catalogo />} />
@@ -51,9 +52,10 @@ function App() {
                 <Route path="/login" element={<LoginModal />} />
                 <Route path="/cadastro" element={<CadastroModal />} />
                 <Route path="/sobre" element={<Sobre />} />
-                <Route path="/admin" element={<AdminRoute element={<PainelAdmin />} />} />
-                <Route path="/admin/adicionar" element={<AdminRoute element={<AdicionarEvento />} />} />
-                <Route path="/favoritos" element={<PrivateRoute element={<FavoritosPage />} />} />
+                <Route path="/recuperar-senha" element={<ForgotPassword />} />
+                <Route path="/admin" element={<ProtectedRoute element={<PainelAdmin />} requiredRole="admin" />} />
+                <Route path="/admin/adicionar" element={<ProtectedRoute element={<AdicionarEvento />} requiredRole="admin" />} />
+                <Route path="/favoritos" element={<ProtectedRoute element={<FavoritosPage />} requiredRole="user" />} />
               </Routes>
             </BrowserRouter>
           </EventsProvider>

@@ -1,24 +1,29 @@
 import React from 'react';
-import './MapExploration.css'; // Certifique-se de que o caminho do CSS está correto
-import MapComponente from '../mapcomponente/MapComponente'; // Importe o componente do mapa
+import './MapExploration.css';
+import { useNavigate } from 'react-router-dom';
+import MapComponente from '../mapcomponente/MapComponente';
 
 const MapExploration = () => {
+  const navigate = useNavigate();
+
+  const abrirPaginaMapa = () => {
+    navigate('/mapa');
+  };
+
   return (
     <div className="map-section">
-  <div className="map-info">
-    <h2>Mapa de Exploração</h2>
-    <p>
-      Explore os eventos disponíveis na sua área com nosso mapa interativo.
-      Clique em cada marcador para ver mais detalhes.
-    </p>
-    <button className="expand-btn">Expandir</button>
-  </div>
+      <div className="map-info">
+        <h2>Mapa de Exploração</h2>
+        <p>
+          Explore os eventos disponíveis na sua área com nosso mapa interativo.
+          Clique em cada marcador para ver mais detalhes.
+        </p>
+      </div>
 
-  <div className="map-container">
-    <MapComponente />
-  </div>
-</div>
-
+      <div className="map-container">
+        <MapComponente />
+      </div>
+    </div>
   );
 };
 

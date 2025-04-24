@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";  // Caso você precise fazer requisições
 
 // Criando o contexto de autenticação
 const AuthContext = createContext();
@@ -13,16 +14,27 @@ export const AuthProvider = ({ children }) => {
     const loadUser = async () => {
       try {
         const storedUser = localStorage.getItem("user");
-        if (storedUser) {
+        const token = localStorage.getItem("token"); // Carrega o token do localStorage
+
+        if (storedUser && token) {
           const parsedUser = JSON.parse(storedUser);
-          if (parsedUser?.id) {
-            console.log("Usuário carregado:", parsedUser);
+          // Validar token com a API (exemplo)
+          const response = await axios.get("/auth/validate-token", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.status === 200) {
+            console.log("Usuário autenticado:", parsedUser);
             setUser(parsedUser);
+          } else {
+            logout(); // Se o token for inválido, faz logout
           }
         }
       } catch (err) {
         setError("Falha ao carregar o usuário do armazenamento local.");
-        console.error("Erro ao carregar o usuário do localStorage:", err);
+        console.error("Erro ao carregar o usuário:", err);
       } finally {
         setLoading(false);
       }
@@ -30,28 +42,30 @@ export const AuthProvider = ({ children }) => {
   
     loadUser();
   }, []);
-  
-  // Função de login
-  const login = (userData) => {
+
+  // Função de login assíncrona
+  const login = async (userData) => {
     try {
-      // Verifique se 'userData' contém o campo 'id'
-      if (userData?.id) {
-        localStorage.setItem("user", JSON.stringify(userData)); // Salva o usuário no localStorage
-        setUser(userData); // Atualiza o estado do usuário
-      } else {
-        throw new Error("ID do usuário não encontrado.");
-      }
+      // Chamada à API de autenticação para obter o token (exemplo)
+      const response = await axios.post("/auth/login", userData);
+      const { token, user } = response.data;
+
+      // Salva no localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      
+      setUser(user); // Atualiza o estado do usuário
     } catch (err) {
-      setError("Falha ao salvar o usuário no armazenamento local.");
-      console.error("Erro ao salvar o usuário:", err);
+      setError("Falha ao realizar login.");
+      console.error("Erro ao fazer login:", err);
     }
   };
-  
 
   // Função de logout
   const logout = () => {
     try {
       localStorage.removeItem("user"); // Remove o usuário do localStorage
+      localStorage.removeItem("token"); // Remove o token também
       setUser(null); // Limpa o estado do usuário
     } catch (err) {
       setError("Falha ao remover o usuário do armazenamento local.");
