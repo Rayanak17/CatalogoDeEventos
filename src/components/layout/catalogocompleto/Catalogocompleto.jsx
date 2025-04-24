@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useFavorites } from "../../../context/FavoritesContext";
 import { useAuth } from "../../../context/AuthContext";
 import axios from "axios";
-import "./CatalogoCompleto.css";
+import "./Catalogocompleto.css";
 
 const EVENT_SERVICE_URL = import.meta.env.VITE_EVENT_SERVICE_URL;
 
