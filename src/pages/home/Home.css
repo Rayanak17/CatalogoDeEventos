@@ -239,12 +239,6 @@ button:hover {
   min-height: 450px;
 }
 
-@media (min-width: 640px) {
-  .map-container {
-    min-height: 700px;
-    max-height: 800px;
-  }
-}
 
 @media (max-width: 640px) {
   .main-content {
@@ -252,7 +246,6 @@ button:hover {
     align-items: center;
     text-align: center;
   }
-  
 
   .text-content {
     align-items: center;
@@ -269,6 +262,18 @@ button:hover {
   }
 
   h1 {
-  font-size: 35px !important; 
+  font-size: 38px !important; 
 }
+
+p {
+  font-size: 20px !important;
+  padding: 15px;
+}
+  .nav-links li a {
+    font-size: 14px !important;
+  }
+  
+  button {
+    font-size: 15px !important;
+  }
 }
