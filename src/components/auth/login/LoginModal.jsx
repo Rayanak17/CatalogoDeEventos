@@ -7,18 +7,20 @@ import ForgotPasswordModal from "../forgotpassword/ForgotPassword";
 
 const AUTH_SERVICE_URL = import.meta.env.VITE_AUTH_SERVICE_URL;
 
-const LoginModal = ({ onClose, onSwitchToSignup }) => {
+const LoginModal = ({
+  onClose = () => {}, // Garante que seja uma função vazia por padrão
+  onSwitchToSignup = () => {}, // Garante que seja uma função vazia por padrão
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
   const { login, user } = useAuth();
 
-  // Quando o usuário for autenticado e o estado for alterado
   useEffect(() => {
     if (user) {
-      console.log("Usuário logado com sucesso:", user); // Para depuração
-      onClose(); // Fecha o modal após o login bem-sucedido
+      console.log("Usuário logado com sucesso:", user);
+      onClose(); // Aqui, onClose será sempre uma função, mesmo que vazia
     }
   }, [user, onClose]);
 
@@ -42,7 +44,7 @@ const LoginModal = ({ onClose, onSwitchToSignup }) => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(userData));
 
-      login(userData); // Atualiza o contexto com os dados do usuário
+      login(userData);
       alert("Login realizado com sucesso!");
     },
     onError: (err) => {
@@ -52,16 +54,16 @@ const LoginModal = ({ onClose, onSwitchToSignup }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setError("");  // Limpa mensagens de erro anteriores
-    loginMutation.mutate();  // Executa a mutação de login
+    setError("");
+    loginMutation.mutate();
   };
 
   const handleForgotPassword = () => {
-    setIsForgotPasswordOpen(true); // Abre o modal de recuperação de senha
+    setIsForgotPasswordOpen(true);
   };
 
   const handleCloseForgotPassword = () => {
-    setIsForgotPasswordOpen(false); // Fecha o modal de recuperação de senha
+    setIsForgotPasswordOpen(false);
   };
 
   return (
@@ -90,6 +92,7 @@ const LoginModal = ({ onClose, onSwitchToSignup }) => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            
             <button type="submit" disabled={loginMutation.isLoading}>
               {loginMutation.isLoading ? "Entrando..." : "Entrar"}
             </button>

@@ -27,11 +27,11 @@
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
+
 .modal-overlay .modal-content {
   width: 700px !important; /* ou outro valor desejado */
   max-width: 100% !important;  /* Garante que não vai ultrapassar o limite da tela */
 }
-
 
 /* ESQUERDA */
 .left-section {
@@ -95,10 +95,10 @@
   background: #5f0bcf;
 }
 
+
 .left-section .forgot-password {
   margin-top: 4px;
   background: none;
-  border: none;
   color: #333;
   font-size: 13px;
   text-decoration: underline;
@@ -109,7 +109,7 @@
 .left-section .error-message {
   font-size: 12px;
   color: red;
-  margin-bottom: 8px;
+  margin-top: 2px;
 }
 
 /* DIREITA – forma de meia-lua roxa */
@@ -179,4 +179,172 @@
 .right-section .signup-link:hover {
   background: white;
   color: #7c18ec;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95% !important;
+    height: auto;
+    border-radius: 12px;
+    padding: 10px;
+    flex-direction: column; /* empilha as seções */
+  }
+
+  /* Esquerda */
+  .left-section {
+    padding: 10px;
+    align-items: flex-start;
+  }
+
+  .left-section h2 {
+    font-size: 16px;
+  }
+
+  .left-section .subtitle {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+
+  .left-section form {
+    gap: 8px;
+  }
+
+  .left-section input {
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .left-section button[type="submit"] {
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+
+  .left-section .forgot-password {
+    font-size: 11px;
+  }
+
+  .left-section .error-message {
+    font-size: 11px;
+  }
+
+  /* Direita */
+  .right-section {
+    width: 100%;
+    padding: 12px 10px;
+    text-align: center;
+  }
+
+  .right-section .theme-toggle {
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .right-section .highlight {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .right-section .signup-text {
+    font-size: 11px;
+    margin-bottom: 16px;
+  }
+
+  .right-section .signup-link {
+    padding: 8px 16px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  /* Reduz a meia-lua */
+  .modal-content::after {
+    width: 100%;
+    height: 120px;
+    border-radius: 100px 0 0 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    flex-direction: column;
+    width: 95% !important;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .left-section {
+    padding: 20px 16px;
+    align-items: center;
+  }
+
+  .left-section h2 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .left-section .subtitle {
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+
+  .left-section form {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .left-section input {
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .left-section button[type="submit"] {
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .left-section .forgot-password {
+    font-size: 10px;
+    margin-top: 4px;
+    text-align: center;
+  }
+
+  .right-section {
+    width: 100%;
+    padding: 20px 16px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    background: #7c18ec;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .right-section .theme-toggle {
+    top: 12px;
+    right: 12px;
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .right-section .highlight {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .right-section .signup-text {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .right-section .signup-link {
+    font-size: 12px;
+    padding: 8px 16px;
+    border-radius: 8px;
+  }
+
+  .modal-content::after {
+    display: none; /* tira a meia-lua, fica mais limpo no celular */
+  }
 }
