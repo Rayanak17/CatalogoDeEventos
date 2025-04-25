@@ -65,8 +65,6 @@ export default function Home() {
         <MapExploration />
       </section>
 
-      {showHelpModal && <HelpModal onClose={() => setShowHelpModal(false)} />}
-
       <Footer />
     </div>
   );
