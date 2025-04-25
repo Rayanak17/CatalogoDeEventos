@@ -232,7 +232,8 @@ body {
     position: absolute;
     right: 30px;
     top: 45px;
-    background-color: transparent !important;
+    background-color: #ffffff !important;
+    margin-right: 4px;
   }
 
   /* Inicialmente, as dropdowns ficam invisíveis */

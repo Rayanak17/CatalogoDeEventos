@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../../context/AuthContext';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "./navbar.css";
 import { User } from "lucide-react";
 
 const Navbar = ({ onLoginClick }) => {
   const { user, logout } = useAuth();
-  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false); // Estado para o menu do usuário
   const menuRef = useRef(null); // Ref para o menu do usuário
@@ -30,10 +29,6 @@ const Navbar = ({ onLoginClick }) => {
     }
   }, [menuOpen]);
 
-  if (location.pathname !== '/') {
-    return null;
-  }
-
   return (
     <div className="App">
       <nav className="navbar">
@@ -42,6 +37,7 @@ const Navbar = ({ onLoginClick }) => {
           ☰
         </button>
         <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
+          <li><Link to="/">Início</Link></li>
           <li><Link to="/sobre">Sobre nós</Link></li>
           <li><Link to="/catalogocompleto">Eventos</Link></li>
           <li><Link to="/explorar">Mapa</Link></li>
