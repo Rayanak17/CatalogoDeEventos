@@ -45,12 +45,12 @@ const Navbar = ({ onLoginClick }) => {
               <User className="user-icon" />
               {menuOpen && (
                 <div className="dropdown-menu">
-                  <Link to="/favoritos">Eventos Favoritos</Link>
-                  {user?.email === "teste@example.com" && (
-                    <Link to="/admin/adicionar">Adicionar Evento</Link>
-                  )}
-                  <button className="logout-btn" onClick={logout}>Sair</button>
-                </div>
+                <Link to="/favoritos">Eventos Favoritos</Link>
+                {(user?.email === "lucasm241301@gmail.com" || user?.email === "rayanatxr@gmail.com") && (
+                  <Link to="/admin/adicionar">Adicionar Evento</Link>
+                )}
+                <button className="logout-btn" onClick={logout}>Sair</button>
+              </div>
               )}
             </div>
           ) : (
