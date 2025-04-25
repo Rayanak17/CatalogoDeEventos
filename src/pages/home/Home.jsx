@@ -65,7 +65,6 @@ export default function Home() {
         <MapExploration />
       </section>
 
-      <Footer />
     </div>
   );
 }
