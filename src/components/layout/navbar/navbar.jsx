@@ -8,12 +8,13 @@ const Navbar = ({ onLoginClick }) => {
   const { user, logout } = useAuth();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false); // Estado para o menu do usuário
+  const menuRef = useRef(null); // Ref para o menu do usuário
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setMenuOpen(false);
+        setUserMenuOpen(false); // Fecha o menu se clicar fora
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -21,6 +22,13 @@ const Navbar = ({ onLoginClick }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    // Fechar o menu do usuário quando o menu de navegação for aberto
+    if (menuOpen) {
+      setUserMenuOpen(false); // Fecha o menu de usuário
+    }
+  }, [menuOpen]);
 
   if (location.pathname !== '/') {
     return null;
@@ -37,20 +45,19 @@ const Navbar = ({ onLoginClick }) => {
           <li><Link to="/sobre">Sobre nós</Link></li>
           <li><Link to="/catalogocompleto">Eventos</Link></li>
           <li><Link to="/explorar">Mapa</Link></li>
-          
         </ul>
         <div className="nav-buttons">
           {user ? (
-            <div className="user-menu" ref={menuRef} onClick={() => setMenuOpen(!menuOpen)}>
+            <div className="user-menu" ref={menuRef} onClick={() => setUserMenuOpen(!userMenuOpen)}>
               <User className="user-icon" />
-              {menuOpen && (
+              {userMenuOpen && (
                 <div className="dropdown-menu">
-                <Link to="/favoritos">Eventos Favoritos</Link>
-                {(user?.email === "lucasm241301@gmail.com" || user?.email === "rayanatxr@gmail.com") && (
-                  <Link to="/admin/adicionar">Adicionar Evento</Link>
-                )}
-                <button className="logout-btn" onClick={logout}>Sair</button>
-              </div>
+                  <Link to="/favoritos">Eventos Favoritos</Link>
+                  {(user?.email === "lucasm241301@gmail.com" || user?.email === "rayanatxr@gmail.com") && (
+                    <Link to="/admin/adicionar">Adicionar Evento</Link>
+                  )}
+                  <button className="logout-btn" onClick={logout}>Sair</button>
+                </div>
               )}
             </div>
           ) : (
