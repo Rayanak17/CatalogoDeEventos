@@ -52,9 +52,10 @@ const CadastroModal = ({ onClose, onSwitchToLogin }) => {
         <button className="close-modal" onClick={onClose}>×</button>
 
         <div className="left-side">
-  <p className="highlight">OLÁ, AMIGO!</p>
-  <p>SE VOCÊ JÁ TEM UMA CONTA, FAÇA LOGIN</p>  <button className="login-link" onClick={() => onSwitchToLogin()}>Login</button>
-</div>
+          <p className="highlight">OLÁ, AMIGO!</p>
+          <p>SE VOCÊ JÁ TEM UMA CONTA, FAÇA LOGIN</p>
+        </div>
+       
 
 
         <div className="right-side">
