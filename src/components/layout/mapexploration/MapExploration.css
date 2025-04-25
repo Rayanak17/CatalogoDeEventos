@@ -33,13 +33,14 @@
 
 .map-container {
   width: 85%;
-  height: 85%; /* Tamanho fixo para desktop */
+  height: 85vh; /* Tamanho fixo para desktop */
   flex: 2;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   position: relative;
-  border: 2px solid #ddd; /* Borda para o mapa */
-}
+  border: 2px 2px solid #ddd; 
+  }
+  
 
 iframe {
   width: 100%;
