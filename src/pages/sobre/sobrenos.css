@@ -9,11 +9,12 @@
   text-align: center;
   transition: all 0.3s ease;
   color: #333;
+  padding: 20px;
 }
 
 .sobre-container:hover {
-  transform: translateY(-8px); /* Leve elevação ao passar o mouse */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Efeito sutil de sombra */
+  transform: none; /* Remover transformação ao passar o mouse */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra padrão sem efeito roxo */
 }
 
 /* Título da página */
@@ -23,8 +24,8 @@
   margin-bottom: 1.5rem;
   font-weight: 600;
   letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding-bottom: 0.5rem;
+  text-transform: uppercase; 
+  padding-top: 40px;
 }
 
 /* Parágrafos do conteúdo */
@@ -32,18 +33,12 @@
   font-size: 1.15rem;
   line-height: 1.7;
   color: #666;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.7rem;
   max-width: 85%;
   margin-left: auto;
   margin-right: auto;
   letter-spacing: 0.5px;
-}
-
-/* Estilo para emojis */
-.sobre-container p span {
-  font-size: 1.5rem;
-  margin-left: 5px;
-  color: #6a1b9a;
+  margin-bottom: 10px;
 }
 
 /* Fotos de Rayana e Lucas */
@@ -62,12 +57,13 @@
   object-fit: cover;
   border: 3px solid #6a1b9a;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: none; /* Remover a animação de zoom e efeito */
 }
 
+/* Remover animação de zoom nas imagens */
 .sobre-container .foto-container img:hover {
-  transform: scale(1.05); /* Leve zoom nas imagens */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra suave mais destacada */
+  transform: none; /* Sem zoom */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Sem efeito roxo de sombra */
 }
 
 /* Diferenciar as pessoas (Rayana e Lucas) */
@@ -82,28 +78,3 @@
   color: #888;
 }
 
-/* Ajuste para responsividade */
-@media (max-width: 768px) {
-  .sobre-container {
-    padding: 2rem 1rem;
-  }
-
-  .sobre-container h1 {
-    font-size: 2rem;
-  }
-
-  .sobre-container p {
-    font-size: 1rem;
-    max-width: 95%;
-  }
-
-  .sobre-container .foto-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .sobre-container .foto-container img {
-    width: 8rem;
-    height: 8rem;
-  }
-}
