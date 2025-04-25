@@ -47,7 +47,7 @@
 
 .map-container {
   width: 85%; 
-  height: 10%; /* Definindo uma altura fixa para a div do mapa */
+  height: 300px; /* Ajuste de altura fixo */
   flex: 2;
   border-radius: 16px;
   overflow: hidden;
@@ -59,4 +59,76 @@ iframe {
   height: 100%;
   border-radius: 16px;
   object-fit: contain; /* Ajusta o mapa sem cortar, mantendo a proporção */
+}
+
+/* Media Queries para Responsividade */
+
+@media (max-width: 768px) {
+  .map-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 5px;
+  }
+
+  .map-info {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .map-info h2 {
+    font-size: 28px !important;
+  }
+
+  .map-info p {
+    font-size: 15px;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 30vh; /* Altura baseada na viewport */
+    max-height: 200px; /* Limita para não ocupar muito espaço */
+    box-sizing: border-box;
+  }
+
+  .expand-btn {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+
+/* Para tablets */
+@media (max-width: 1024px) {
+  .map-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 5px;
+  }
+
+  .map-info {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .map-info h2 {
+    font-size: 32px; /* Ajuste do tamanho para tablets */
+  }
+
+  .map-info p {
+    font-size: 17px;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 250px; /* Ajuste de altura para tablets */
+  }
+
+  .expand-btn {
+    font-size: 17px;
+    padding: 13px 22px;
+  }
 }
