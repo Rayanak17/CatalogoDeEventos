@@ -6,6 +6,7 @@ import { useFavorites } from "../../../context/FavoritesContext";
 import { useAuth } from "../../../context/AuthContext";
 import axios from "axios";
 import "./Catalogocompleto.css";
+import Footer from '../footer/footer.jsx';
 
 const EVENT_SERVICE_URL = import.meta.env.VITE_EVENT_SERVICE_URL;
 

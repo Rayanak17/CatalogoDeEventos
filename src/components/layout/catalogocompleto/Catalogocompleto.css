@@ -8,6 +8,7 @@
   min-height: 100vh;
   font-family: "Poppins", sans-serif;
   background-color: #ffffff;
+  padding: 90px;
 }
 
 .catalogo-header {
@@ -204,7 +205,7 @@
   }
 
   .catalogo-header h1 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     text-align: center; /* Centraliza o h1 */
     width: 100%; /* Garante que o h1 ocupe a largura disponível */
   }
@@ -230,7 +231,7 @@
 
 @media (max-width: 480px) {
   .catalogo-header h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-align: center; /* Centraliza o h1 */
     width: 100%; /* Garante que o h1 ocupe a largura disponível */
   }
