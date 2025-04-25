@@ -13,7 +13,7 @@ const MapExploration = () => {
   return (
     <div className="map-section">
       <div className="map-info">
-        <h2>Mapa de Exploração</h2>
+        <h1>Mapa de Exploração</h1>
         <p>
           Explore os eventos disponíveis na sua área com nosso mapa interativo.
           Clique em cada marcador para ver mais detalhes.
