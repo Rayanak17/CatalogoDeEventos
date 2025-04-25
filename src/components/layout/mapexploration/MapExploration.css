@@ -31,22 +31,6 @@
   margin: 15px 0 25px;
 }
 
-.expand-btn {
-  background: #660099;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 14px 24px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.expand-btn:hover {
-  background: #4a0077;
-}
-
 .map-container {
   width: 85%;
   height: 85%; /* Tamanho fixo para desktop */
