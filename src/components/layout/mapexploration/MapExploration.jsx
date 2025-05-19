@@ -11,7 +11,7 @@ const MapExploration = () => {
   };
 
   return (
-    <div className="map-section">
+    <section id='map' className='map-section map-container'>
       <div className="map-info">
         <h1>Mapa de Exploração</h1>
         <p>
@@ -23,7 +23,7 @@ const MapExploration = () => {
       <div className="map-container">
         <MapComponente />
       </div>
-    </div>
+    </section>
   );
 };
 
