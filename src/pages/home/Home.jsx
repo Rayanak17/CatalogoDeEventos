@@ -12,8 +12,6 @@ import { Link } from 'react-router-dom';
 import MapExploration from '../../components/layout/mapexploration/MapExploration.jsx';
 
 export default function Home() {
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showSignupModal, setShowSignupModal] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
@@ -29,8 +27,6 @@ export default function Home() {
 
   return (
     <div className='App'>
-      <Navbar onLoginClick={() => setShowLoginModal(true)} />
-      
       <main className='main-content'>
         <div className='text-content'>
           <h1>Descubra Eventos em João Pessoa</h1>
@@ -48,18 +44,6 @@ export default function Home() {
       </main>
 
       <Catalogo />
-
-      {showLoginModal && (
-        <LoginModal
-          onClose={() => setShowLoginModal(false)}
-          onSwitchToSignup={() => {
-            setShowLoginModal(false);
-            setShowSignupModal(true);
-          }}
-        />
-      )}
-
-      {showSignupModal && <SignupModal onClose={() => setShowSignupModal(false)} />}
 
       <section id='map' className='map-section map-container'>
         <MapExploration />
