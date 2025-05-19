@@ -45,9 +45,7 @@ export default function Home() {
 
       <Catalogo />
 
-      <section id='map' className='map-section map-container'>
-        <MapExploration />
-      </section>
+      <MapExploration />
 
     </div>
   );
