@@ -1,13 +1,15 @@
 // src/pages/favoritespage/EventsFav.jsx
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import { useFavorites } from '../../context/FavoritesContext';
-import { useNavigate } from 'react-router-dom';
-import './eventsfav.css';
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { useFavorites } from "../../context/FavoritesContext";
+import { useEvents } from "../../context/eventsContext.jsx";
+import { useNavigate } from "react-router-dom";
+import "./eventsfav.css";
 
 const EventsFav = () => {
   const { user } = useAuth();
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
+  const { categories } = useEvents();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ const EventsFav = () => {
     return (
       <div className="favorites-page">
         <p>Por favor, faça login para ver seus eventos favoritos.</p>
-        <button className="login-btn" onClick={() => navigate('/login')}>
+        <button className="login-btn" onClick={() => navigate("/login")}>
           Ir para Login
         </button>
       </div>
@@ -43,22 +45,22 @@ const EventsFav = () => {
           {favorites.map((event) => {
             const start = new Date(event.startDateTime);
             const dateStr = isNaN(start)
-              ? 'Data não informada'
-              : start.toLocaleDateString('pt-BR');
+              ? "Data não informada"
+              : start.toLocaleDateString("pt-BR");
             const timeStr = isNaN(start)
-              ? 'Horário não informado'
-              : start.toLocaleTimeString('pt-BR', {
-                  hour: '2-digit',
-                  minute: '2-digit'
+              ? "Horário não informado"
+              : start.toLocaleTimeString("pt-BR", {
+                  hour: "2-digit",
+                  minute: "2-digit",
                 });
             const address = [
               event.eventAddressStreet,
               event.eventAddressNumber,
               event.eventAddressComplement,
-              event.eventAddressNeighborhood
+              event.eventAddressNeighborhood,
             ]
               .filter(Boolean)
-              .join(', ');
+              .join(", ");
 
             return (
               <li key={event.eventId} className="favorite-card">
@@ -69,7 +71,7 @@ const EventsFav = () => {
                       className="favorite-toggle"
                       onClick={() => toggleFavorite(event)}
                     >
-                      {isFavorite(event.eventId) ? '❤️' : '🤍'}
+                      {isFavorite(event.eventId) ? "❤" : "🤍"}
                     </span>
                   </div>
 
@@ -81,7 +83,7 @@ const EventsFav = () => {
                       <strong>Horário:</strong> {timeStr}
                     </p>
                     <p>
-                      <strong>Endereço:</strong> {address || 'Não informado'}
+                      <strong>Endereço:</strong> {address || "Não informado"}
                     </p>
                   </div>
 
@@ -90,8 +92,19 @@ const EventsFav = () => {
                   </p>
 
                   <div className="favorite-card-tags">
-                    <span className="favorite-tag">A partir de xxx</span>
-                    <span className="favorite-tag">Artístico</span>
+                    <span className="favorite-tag">
+                      {Number(event.eventPrice) > 0
+                        ? `A partir de $${event.eventPrice}`
+                        : "Gratuito"}
+                    </span>
+                    <span className="favorite-tag">
+                      {
+                        categories.find(
+                          (category) =>
+                            category.categoryId === event.eventCategoryId
+                        )?.categoryName || "Categoria não encontrada"
+                      }
+                    </span>
                   </div>
 
                   <a
@@ -112,9 +125,7 @@ const EventsFav = () => {
                       className="favorite-map-img"
                     />
                   ) : (
-                    <div className="favorite-no-img">
-                      Imagem não disponível
-                    </div>
+                    <div className="favorite-no-img">Imagem não disponível</div>
                   )}
                 </div>
               </li>
