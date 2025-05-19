@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useAuth } from '../../../context/AuthContext';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import { useAuth } from "../../../context/AuthContext";
+import { Link } from "react-router-dom";
 import "./navbar.css";
-import { User } from "lucide-react";
+import { User, Menu } from "lucide-react";
 
 const Navbar = ({ onLoginClick }) => {
   const { user, logout } = useAuth();
@@ -30,38 +30,53 @@ const Navbar = ({ onLoginClick }) => {
   }, [menuOpen]);
 
   return (
-    <div className="App">
-      <nav className="navbar">
-        <div className="logo">JampaEvents</div>
+    <nav className="navbar">
+      <div className="logo">JampaEvents</div>
+      <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+        <li>
+          <Link to="/">Início</Link>
+        </li>
+        <li>
+          <Link to="/sobre">Sobre nós</Link>
+        </li>
+        <li>
+          <Link to="/catalogocompleto">Eventos</Link>
+        </li>
+        <li>
+          <Link to="/explorar">Mapa</Link>
+        </li>
+      </ul>
+      <div className="nav-buttons">
+        {user ? (
+          <div
+            className="user-menu"
+            ref={menuRef}
+            onClick={() => setUserMenuOpen(!userMenuOpen)}
+          >
+            <User className="user-icon" />
+            {userMenuOpen && (
+              <div className="dropdown-menu">
+                <Link to="/favoritos">Eventos Favoritos</Link>
+                {(user?.email === "lucasm241301@gmail.com" ||
+                  user?.email === "rayanatxr@gmail.com") && (
+                  <Link to="/admin/adicionar">Adicionar Evento</Link>
+                )}
+                <button className="logout-btn" onClick={logout}>
+                  Sair
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button className="login-btn" onClick={onLoginClick}>
+            Login
+          </button>
+        )}
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-          ☰
+          <Menu/>
         </button>
-        <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
-          <li><Link to="/">Início</Link></li>
-          <li><Link to="/sobre">Sobre nós</Link></li>
-          <li><Link to="/catalogocompleto">Eventos</Link></li>
-          <li><Link to="/explorar">Mapa</Link></li>
-        </ul>
-        <div className="nav-buttons">
-          {user ? (
-            <div className="user-menu" ref={menuRef} onClick={() => setUserMenuOpen(!userMenuOpen)}>
-              <User className="user-icon" />
-              {userMenuOpen && (
-                <div className="dropdown-menu">
-                  <Link to="/favoritos">Eventos Favoritos</Link>
-                  {(user?.email === "lucasm241301@gmail.com" || user?.email === "rayanatxr@gmail.com") && (
-                    <Link to="/admin/adicionar">Adicionar Evento</Link>
-                  )}
-                  <button className="logout-btn" onClick={logout}>Sair</button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <button className="login-btn" onClick={onLoginClick}>Login</button>
-          )}
-        </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 };
 
